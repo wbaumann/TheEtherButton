@@ -1,0 +1,24 @@
+{
+  "name": "TheEtherButton",
+  "version": "1.0.0",
+  "description": "An implementation of the reddit /r/TheButton game on the Ethereum Blockchain",
+  "main": "index.js",
+  "dependencies": {
+    "zeppelin-solidity": "1.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wbaumann/TheEtherButton.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+  "bugs": {
+    "url": "https://github.com/wbaumann/TheEtherButton/issues"
+  }
+  "homepage": "https://theetherbutton.com"
+}
