@@ -38,6 +38,13 @@ contract ButtonClickGame is ERC721Token {
     ButtonClickMetadata[] clicks;
 
     /**
+     * In order to reduce the likelihood of someone spamming the button click continually with
+     * multiple ether addresses, which would effectively prevent the button from ever decrementing, 
+     * we have introduced the concept of a minimum fee required to click the button. 
+     */
+    uint256 public minimumFee;
+
+    /**
      * Defines the current game generation. Users can play again whenever this increments
      *
      * http://solidity.readthedocs.io/en/develop/contracts.html?#visibility-and-getters
@@ -74,6 +81,9 @@ contract ButtonClickGame is ERC721Token {
      * @return the id in our array, which is the latest click
      */
     function clickButton() public returns (uint256) {
+        // Avoid spamming the game with a minimum fee
+        require(msg.value >= minimumFee);
+
         // Don't allow the game to be played indefinitely
         require(gameGeneration <= 65535);
 
