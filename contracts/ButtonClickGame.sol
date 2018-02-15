@@ -39,25 +39,12 @@ contract ButtonClickGame is ERC721Token, ButtonClickGameControls {
     ButtonClickMetadata[] clicks;
 
     /**
-     * In order to reduce the likelihood of someone spamming the button click continually with
-     * multiple ether addresses, which would effectively prevent the button from ever decrementing, 
-     * we have introduced the concept of a minimum fee required to click the button. 
-     */
-    uint256 public minimumFee;
-
-    /**
-     * Defines the current game generation. Users can play again whenever this increments
+     * Defines the current game generation. Users can play again whenever this increments.
+     * Note: This always starts with generation 1
      *
      * http://solidity.readthedocs.io/en/develop/contracts.html?#visibility-and-getters
      */
-    uint256 public gameGeneration;
-
-    /**
-     * Defines how many blocks must elapse before the game can be "won"
-     *
-     * http://solidity.readthedocs.io/en/develop/contracts.html?#visibility-and-getters
-     */
-    uint256 public requiredBlocksElapsedForVictory;
+    uint256 public gameGeneration = 1;
 
     /**
      * Defines the block number at which a click will "win"
@@ -81,7 +68,7 @@ contract ButtonClickGame is ERC721Token, ButtonClickGameControls {
      *
      * @return the id in our array, which is the latest click
      */
-    function clickButton() public returns (uint256) {
+    function clickButton() external payable returns (uint256) {
         // Avoid spamming the game with a minimum fee
         require(msg.value >= minimumFee);
 
@@ -132,7 +119,7 @@ contract ButtonClickGame is ERC721Token, ButtonClickGameControls {
      * 
      * @param _id The ID of a specific button click token
      */
-    function getClickMetadata(uint256 _id) public view returns (
+    function getClickMetadata(uint256 _id) external view returns (
         uint256 blocksAwayFromDesiredBlock,
         uint256 clickTime,
         uint256 clickGeneration
