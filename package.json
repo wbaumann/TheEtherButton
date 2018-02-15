@@ -1,6 +1,7 @@
 {
-  "name": "react-box",
+  "name": "TheEtherButton",
   "version": "0.1.0",
+  "description": "An implementation of the reddit /r/TheButton game on the Ethereum Blockchain",
   "private": true,
   "devDependencies": {
     "autoprefixer": "6.5.1",
@@ -51,7 +52,8 @@
   "dependencies": {
     "dotenv": "^2.0.0",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "zeppelin-solidity": "1.6.0"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -97,5 +99,16 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wbaumann/TheEtherButton.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wbaumann/TheEtherButton/issues"
+  },
+  "homepage": "https://theetherbutton.com"
 }
