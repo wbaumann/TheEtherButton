@@ -2,8 +2,9 @@ pragma solidity ^0.4.18;
 
 import 'zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
 import 'zeppelin-solidity/contracts/math/Math.sol';
+import './ButtonClickGameControls.sol';
 
-contract ButtonClickGame is ERC721Token {
+contract ButtonClickGame is ERC721Token, ButtonClickGameControls {
 
     /**
      * @dev This event is fired whenever a user clicks on a button, thereby creating a click
