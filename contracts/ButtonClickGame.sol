@@ -82,8 +82,8 @@ contract ButtonClickGame is ERC721Token, ButtonClickGameControls {
         addressLastClickedForGeneration[msg.sender] = gameGeneration;
 
         // We use max256 to ensure that 0 is the effective floor for elapsed blocks
-        uint64 _blocksAwayFromDesiredBlock = Math.max256(0, blockNumberForVictory - block.number);
-        uint64 _generation = gameGeneration;
+        uint256 _blocksAwayFromDesiredBlock = Math.max256(0, blockNumberForVictory - block.number);
+        uint256 _generation = gameGeneration;
 
         // Victory condition!!
         if (_blocksAwayFromDesiredBlock == 0) {
@@ -96,8 +96,8 @@ contract ButtonClickGame is ERC721Token, ButtonClickGameControls {
 
         // Create a new click
         ButtonClickMetadata memory _click = ButtonClickMetadata({
-            blocksAwayFromDesiredBlock: _blocksAwayFromDesiredBlock,
-            generation: _generation,
+            blocksAwayFromDesiredBlock: uint64(_blocksAwayFromDesiredBlock),
+            clickGeneration: uint64(_generation),
             clickTime: uint64(now)
         });
         uint256 newClickId = clicks.push(_click) - 1;
