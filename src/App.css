@@ -62,6 +62,10 @@ code {
   float: right;
 }
 
+.navbar .navbar-left {
+  float: left;
+}
+
 .navbar .uport-logo {
   height: 16px;
   margin-right: 10px;
