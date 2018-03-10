@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ButtonClickGameContract from '../build/contracts/ButtonClickGameContract.json'
 import getWeb3 from './utils/getWeb3'
+import Header from './components/Header/Header'
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -70,9 +71,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav className="navbar pure-menu pure-menu-horizontal">
-            <a href="#" className="pure-menu-heading pure-menu-link">Truffle Box</a>
-        </nav>
+        <Header />
 
         <main className="container">
           <div className="pure-g">
