@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
-import { User } from 'react-feather';
-
-import '../../css/oswald.css'
-import '../../css/open-sans.css'
-import '../../css/pure-min.css'
+import PropTypes from 'prop-types';
 
 import './styles.css'
 
 class Account extends Component {
+    getActiveAccount() {
+        // TODO: Substring
+        return this.props.accounts == null ? "" : this.props.accounts[0]
+    }
+
     render() {
         return(
-            <div className="navbar-right">
-                <User color="#ffffff" className="account"/>
-                <a href="#" className="pure-menu-heading pure-menu-link">0x0123456789...</a>
-            </div>
+            <a href="#" className="pure-menu-heading pure-menu-link">{this.getActiveAccount()}</a>
         );
     }
 }
+
+Account.propTypes = {
+    accounts : PropTypes.arrayOf(PropTypes.string)
+};
 
 export default Account

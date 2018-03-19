@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import ButtonClickGameContract from '../build/contracts/ButtonClickGameContract.json'
 import getWeb3 from './utils/getWeb3'
 import Header from './components/Header/Header'
+import Tooltip from './components/Tooltip/Tooltip'
+import TheButton from './components/TheButton/TheButton'
+import Stats from './components/Stats/Stats'
+import Clicks from './components/Clicks/Clicks'
+import Faq from './components/Faq/Faq'
+import Footer from './components/Footer/Footer'
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -13,8 +19,10 @@ class App extends Component {
     super(props)
 
     this.state = {
-      storageValue: 0,
-      web3: null
+      gameGeneration: -1,
+      clicks: 0,
+      web3: null,
+      accounts: null,
     }
   }
 
@@ -53,17 +61,17 @@ class App extends Component {
 
     // Get accounts.
     this.state.web3.eth.getAccounts((error, accounts) => {
+      this.setState({ accounts: accounts})
+
       buttonClickGame.deployed().then((instance) => {
         buttonClickGameInstance = instance
-
-        // Stores a given value, 5 by default.
-        return 5
+        return instance
       }).then((result) => {
         // Get the value from the contract to prove it worked.
         return buttonClickGameInstance.gameGeneration.call(accounts[0])
       }).then((result) => {
         // Update state with the result.
-        return this.setState({ storageValue: result.c[0] })
+        return this.setState({ gameGeneration: result.c[0] })
       })
     })
   }
@@ -71,20 +79,19 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
-
+        <Header accounts={this.state.accounts} />
+        
         <main className="container">
+          <Tooltip />
           <div className="pure-g">
-            <div className="pure-u-1-1">
-              <h1>Good to Go!</h1>
-              <p>Your Truffle Box is installed and ready.</p>
-              <h2>Smart Contract Example</h2>
-              <p>If your contracts compiled and migrated successfully, below will show a stored value of 5 (by default).</p>
-              <p>Try changing the value stored on <strong>line 59</strong> of App.js.</p>
-              <p>The stored value is: {this.state.storageValue}</p>
-            </div>
+            <TheButton />
           </div>
+          <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} />
+          <Clicks />
+          <Faq />
         </main>
+
+        <Footer />        
       </div>
     );
   }

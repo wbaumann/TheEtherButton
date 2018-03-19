@@ -68,7 +68,7 @@ contract ButtonClickGame is ERC721Token, ButtonClickGameControls {
      *
      * @return the id in our array, which is the latest click
      */
-    function clickButton() external payable returns (uint256) {
+    function clickButton() external isStarted payable returns (uint256) {
         // Avoid spamming the game with a minimum fee
         require(msg.value >= minimumFee);
 
