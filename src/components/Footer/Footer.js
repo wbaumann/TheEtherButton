@@ -5,12 +5,13 @@ import './styles.css'
 class Footer extends Component {
     render() {
         return(
-            <div>
-                <a href="#">GitHub</a>
-                <a href="#">EtherScan</a>
-                <a href="#">License</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Use</a>
+            <div className="footer">
+                <ul>
+                    <li><a href="https://github.com/wbaumann/TheEtherButton">GitHub</a></li>
+                    <li><a href="#">EtherScan</a></li>
+                    <li><a href="https://opensource.org/licenses/MIT">License</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
             </div>
         );
     }

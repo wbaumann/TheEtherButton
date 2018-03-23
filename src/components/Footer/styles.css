@@ -1,0 +1,29 @@
+.footer {
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
+    margin: 1em;
+    overflow: hidden;
+ }
+.footer ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style-type: none;
+    justify-content: center;
+}
+.footer li {
+    margin: .25em 0;
+    padding: 0 1em;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+.footer a {
+    font-size: 14px;
+    color: #888888
+}
+.footer a:hover {
+    color: #666666
+}
