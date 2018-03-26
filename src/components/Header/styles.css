@@ -1,0 +1,35 @@
+/* NAVBAR */
+
+.navbar {
+    display: inline-block;
+    width: 100%;
+    background: #0c1a2b;
+    font-family: 'Oswald', 'Arial Narrow', sans-serif;
+  }
+  
+.navbar a {
+    color: #fff;
+}
+
+.navbar a:active,
+.navbar a:focus,
+.navbar a:hover {
+    background: #233e5e;
+}
+
+.navbar .pure-menu-heading {
+    font-weight: bold;
+    text-transform: none;
+    vertical-align: middle;
+    font-size: 20px;
+}
+
+.navbar .navbar-right {
+    float: right;
+}
+
+.navbar .navbar-left {
+    float: left;
+}
+  
+  

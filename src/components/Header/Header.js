@@ -11,8 +11,8 @@ class Header extends Component {
     render() {
         return(
             <div>
-                <nav className="navbar pure-menu pure-menu-horizontal">
-                    <a href="#" className="pure-menu-heading pure-menu-link navbar-left">The Ether Button</a>
+                <nav className="navbar">
+                    <a href="#" className="pure-menu-heading navbar-left">The Ether Button</a>
                     <AccountsList accounts={this.props.accounts} />
                 </nav>
             </div>

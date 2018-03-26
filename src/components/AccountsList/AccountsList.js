@@ -8,10 +8,12 @@ import './styles.css'
 class AccountsList extends Component {
     render() {
         return(
-            <div className="navbar-right">
-                <User color="#ffffff" className="account"/>
-                <Account accounts={this.props.accounts} />
-                <Network />
+            <div className="navbar-right account-wrapper">
+                <User color="#ffffff" className="account-icon"/>
+                <div className="account-details" >
+                    <Account accounts={this.props.accounts} />
+                    <Network />
+                </div>
             </div>
         );
     }

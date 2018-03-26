@@ -11,7 +11,7 @@ class Account extends Component {
 
     render() {
         return(
-            <a href="#" className="pure-menu-heading pure-menu-link">{this.getActiveAccount()}</a>
+            <p className="active-account">{this.getActiveAccount()}</p>
         );
     }
 }
