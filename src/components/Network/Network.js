@@ -5,12 +5,18 @@ import './styles.css'
 
 class Network extends Component {
     getActiveNetwork() {
-        if (this.props.networkId < 0) {
-            return "Inactive"
-        } else if (this.props.networkId === 0) {
-            return "MainNet"
-        } else {
-            return "Other"
+        if (!this.props.networkId) {
+            return "Hi";
+        }
+        switch (this.props.networkId) {
+            case 1:
+                return "MainNet";
+            case 3:
+                return "Ropsten";
+            case 4: 
+                return "Rinkeby";
+            default:
+                return "Unknown Network";
         }
     }
 

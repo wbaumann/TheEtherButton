@@ -23,6 +23,7 @@ class App extends Component {
       clicks: 0,
       web3: null,
       accounts: null,
+      networkId: -1,
     }
   }
 
@@ -57,7 +58,7 @@ class App extends Component {
     buttonClickGame.setProvider(this.state.web3.currentProvider)
 
     // Declaring this for later so we can chain functions on SimpleStorage.
-    var buttonClickGameInstance
+    var buttonClickGameInstance;
 
     // Get accounts.
     this.state.web3.eth.getAccounts((error, accounts) => {
@@ -73,13 +74,25 @@ class App extends Component {
         // Update state with the result.
         return this.setState({ gameGeneration: result.c[0] })
       })
-    })
+    });
+
+    // Get active network
+    this.state.web3.version.getNetwork((err, netId) => {
+      if (!err) {
+        try {
+          var networkId = parseInt(netId, 10);
+          this.setState({networkId: networkId});
+        } catch (e) {
+          (console.error || console.log).call(console, e.stack || e);
+        }
+      }
+    });
   }
 
   render() {
     return (
       <div className="App">
-        <Header accounts={this.state.accounts} />
+        <Header accounts={this.state.accounts} networkId={this.state.networkId} />
         
         <main className="container">
           <Tooltip />

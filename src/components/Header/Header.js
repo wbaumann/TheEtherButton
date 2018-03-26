@@ -13,7 +13,7 @@ class Header extends Component {
             <div>
                 <nav className="navbar">
                     <a href="#" className="pure-menu-heading navbar-left">The Ether Button</a>
-                    <AccountsList accounts={this.props.accounts} />
+                    <AccountsList accounts={this.props.accounts} networkId={this.props.networkId} />
                 </nav>
             </div>
         );

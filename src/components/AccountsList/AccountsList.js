@@ -12,7 +12,7 @@ class AccountsList extends Component {
                 <User color="#ffffff" className="account-icon"/>
                 <div className="account-details" >
                     <Account accounts={this.props.accounts} />
-                    <Network />
+                    <Network networkId={this.props.networkId} />
                 </div>
             </div>
         );
