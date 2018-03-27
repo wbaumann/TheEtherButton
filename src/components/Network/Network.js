@@ -5,9 +5,6 @@ import './styles.css'
 
 class Network extends Component {
     getActiveNetwork() {
-        if (!this.props.networkId) {
-            return "Hi";
-        }
         switch (this.props.networkId) {
             case 1:
                 return "MainNet";
