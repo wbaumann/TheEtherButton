@@ -14,17 +14,15 @@ h1, h2, h3 {
   font-family: 'Oswald', 'Arial Narrow', sans-serif;
 }
 
-code {
-  display: block;
-  margin: 20px 0 15px 0;
-  padding: 10px;
-  background: #eee;
+.app {
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
   box-sizing: border-box;
   width: 100%;
-  padding: 45px 20px;
+  padding: 24px;
 }
 
 .pure-button-primary {

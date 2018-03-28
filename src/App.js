@@ -22,6 +22,7 @@ class App extends Component {
       gameGeneration: -1,
       clicks: 0,
       web3: null,
+      hasWeb3: false,
       accounts: null,
       networkId: -1,
     }
@@ -31,18 +32,17 @@ class App extends Component {
     // Get network provider and web3 instance.
     // See utils/getWeb3 for more info.
 
-    getWeb3
-    .then(results => {
-      this.setState({
-        web3: results.web3
-      })
+    getWeb3.then(results => {
+      this.setState({ web3: results.web3, hasWeb3: results.web3 !== null });
 
       // Instantiate contract once web3 provided.
-      this.instantiateContract()
+      if (results.web3) {
+        this.instantiateContract();
+      }
     })
-    .catch(() => {
-      console.log('Error finding web3.')
-    })
+    .catch((e) => {
+      console.log('Error finding web3. ' + e)
+    });
   }
 
   instantiateContract() {
@@ -91,11 +91,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="app">
         <Header accounts={this.state.accounts} networkId={this.state.networkId} />
-        
+        <Tooltip showMetaMaskTooltip={!this.state.hasWeb3} />
         <main className="container">
-          <Tooltip />
           <div className="pure-g">
             <TheButton />
           </div>

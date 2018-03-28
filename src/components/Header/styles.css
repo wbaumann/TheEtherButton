@@ -1,11 +1,11 @@
 /* NAVBAR */
 
 .navbar {
-    display: inline-block;
+    display: flex;
     width: 100%;
     background: #0c1a2b;
     font-family: 'Oswald', 'Arial Narrow', sans-serif;
-  }
+}
   
 .navbar a {
     color: #fff;
@@ -25,11 +25,5 @@
 }
 
 .navbar .navbar-right {
-    float: right;
-}
-
-.navbar .navbar-left {
-    float: left;
-}
-  
-  
+    margin-left: auto;
+} 

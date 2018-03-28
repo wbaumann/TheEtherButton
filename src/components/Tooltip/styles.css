@@ -1,0 +1,9 @@
+.tooltip {
+    display: inline-block;
+    width: 100%;
+    background: #F44336;
+}
+
+.tooltip-hidden { 
+    display:none; 
+}

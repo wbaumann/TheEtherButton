@@ -12,7 +12,7 @@ class Header extends Component {
         return(
             <div>
                 <nav className="navbar">
-                    <a href="#" className="pure-menu-heading navbar-left">The Ether Button</a>
+                    <a href="#" className="pure-menu-heading">The Ether Button</a>
                     <AccountsList accounts={this.props.accounts} networkId={this.props.networkId} />
                 </nav>
             </div>

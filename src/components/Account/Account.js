@@ -5,8 +5,11 @@ import './styles.css'
 
 class Account extends Component {
     getActiveAccount() {
-        // TODO: Substring
-        return this.props.accounts == null ? "" : this.props.accounts[0].substring(0, 12) + "..."
+        if (this.props.accounts && this.props.accounts.length > 0) {
+            return this.props.accounts[0].substring(0, 12) + "...";
+        } else {
+            return "";
+        }
     }
 
     render() {
