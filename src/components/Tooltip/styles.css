@@ -1,9 +1,21 @@
 .tooltip {
-    display: inline-block;
-    width: 100%;
-    background: #F44336;
+    display: flex;
+    padding: 4px;
+    align-items: center; 
+    flex-direction: column;
 }
 
-.tooltip-hidden { 
-    display:none; 
+.tooltip.error {
+    width: auto;
+    background: #D32F2F;
+}
+
+.tooltip.warning {
+    width: auto;
+    background: #FF8F00;
+}
+
+.tooltip p, a {
+    font-size: 16px;
+    color: #fff;
 }

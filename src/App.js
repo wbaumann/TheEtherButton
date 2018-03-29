@@ -37,7 +37,7 @@ class App extends Component {
 
       // Instantiate contract once web3 provided.
       if (results.web3) {
-        this.instantiateContract();
+        this.instantiateContract(results.web3);
       }
     })
     .catch((e) => {
@@ -45,7 +45,19 @@ class App extends Component {
     });
   }
 
-  instantiateContract() {
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
+
+  accountRefresher() {
+    this.state.web3.eth.getAccounts((error, accounts) => {
+      if (!error) {
+        this.setState({ accounts: accounts})
+      }
+    });
+  }
+
+  instantiateContract(web3) {
     /*
      * SMART CONTRACT EXAMPLE
      *
@@ -60,7 +72,6 @@ class App extends Component {
     // Declaring this for later so we can chain functions on SimpleStorage.
     var buttonClickGameInstance;
 
-    // Get accounts.
     this.state.web3.eth.getAccounts((error, accounts) => {
       this.setState({ accounts: accounts})
 
@@ -74,7 +85,13 @@ class App extends Component {
         // Update state with the result.
         return this.setState({ gameGeneration: result.c[0] })
       })
+      .catch(e => {
+        console.log('Failed to find game. ' + e);
+      });
     });
+
+    // Get accounts.
+    this.intervalId = setInterval(this.accountRefresher.bind(this), 250);
 
     // Get active network
     this.state.web3.version.getNetwork((err, netId) => {
@@ -83,9 +100,12 @@ class App extends Component {
           var networkId = parseInt(netId, 10);
           this.setState({networkId: networkId});
         } catch (e) {
-          (console.error || console.log).call(console, e.stack || e);
+          console.log(e);
         }
       }
+    })
+    .catch(e => {
+      console.log('Failed to query Ethereum Network. ' + e);
     });
   }
 
@@ -93,7 +113,7 @@ class App extends Component {
     return (
       <div className="app">
         <Header accounts={this.state.accounts} networkId={this.state.networkId} />
-        <Tooltip showMetaMaskTooltip={!this.state.hasWeb3} />
+        <Tooltip hasWeb3={this.state.hasWeb3} accounts={this.state.accounts} />
         <main className="container">
           <div className="pure-g">
             <TheButton />
