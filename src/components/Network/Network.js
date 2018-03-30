@@ -13,7 +13,7 @@ class Network extends Component {
             case 4: 
                 return "Rinkeby";
             default:
-                return "Unknown Network";
+                return "Unknown";
         }
     }
 
