@@ -3,6 +3,7 @@ import ButtonClickGameContract from '../build/contracts/ButtonClickGameContract.
 import getWeb3 from './utils/getWeb3'
 import Header from './components/Header/Header'
 import Tooltip from './components/Tooltip/Tooltip'
+import Hero from './components/Hero/Hero'
 import TheButton from './components/TheButton/TheButton'
 import Stats from './components/Stats/Stats'
 import Clicks from './components/Clicks/Clicks'
@@ -114,13 +115,15 @@ class App extends Component {
       <div className="app">
         <Header accounts={this.state.accounts} networkId={this.state.networkId} />
         <Tooltip hasWeb3={this.state.hasWeb3} accounts={this.state.accounts} />
+        
         <main className="container">
-          <div className="pure-g">
+          <div className="item" >
+            <Hero />
             <TheButton />
+            <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} />
+            <Clicks />
+            <Faq />
           </div>
-          <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} />
-          <Clicks />
-          <Faq />
         </main>
 
         <Footer />        
