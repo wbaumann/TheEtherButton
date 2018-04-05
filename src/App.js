@@ -41,7 +41,7 @@ class App extends Component {
         this.instantiateContract(results.web3);
       }
     })
-    .catch((e) => {
+    .catch(e => {
       console.log('Error finding web3. ' + e)
     });
   }
@@ -101,12 +101,9 @@ class App extends Component {
           var networkId = parseInt(netId, 10);
           this.setState({networkId: networkId});
         } catch (e) {
-          console.log(e);
+          console.log('Failed to query Ethereum Network. ' + e);
         }
       }
-    })
-    .catch(e => {
-      console.log('Failed to query Ethereum Network. ' + e);
     });
   }
 
