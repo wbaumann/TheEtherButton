@@ -27,6 +27,7 @@ class App extends Component {
       accounts: null,
       networkId: -1,
     }
+    this.intervalIds = [];
   }
 
   componentWillMount() {
@@ -44,16 +45,28 @@ class App extends Component {
     .catch(e => {
       console.log('Error finding web3. ' + e)
     });
+    
   }
 
   componentWillUnmount() {
-    clearInterval(this.intervalId);
+    this.intervalIds.forEach(id => {
+      console.log('Clearing id: ' + id);
+      clearInterval(this.intervalId);
+    });
   }
 
   accountRefresher() {
     this.state.web3.eth.getAccounts((error, accounts) => {
       if (!error) {
         this.setState({ accounts: accounts})
+      }
+    });
+  }
+
+  blockCounter() {
+    this.state.web3.eth.getBlock('latest', (error, result) => {
+      if (!error) {
+        console.log('latest: ', result.number, result.timestamp)
       }
     });
   }
@@ -92,7 +105,7 @@ class App extends Component {
     });
 
     // Get accounts.
-    this.intervalId = setInterval(this.accountRefresher.bind(this), 250);
+    this.intervalIds.push(setInterval(this.accountRefresher.bind(this), 250));
 
     // Get active network
     this.state.web3.version.getNetwork((err, netId) => {
@@ -105,6 +118,9 @@ class App extends Component {
         }
       }
     });
+
+    // Watch for block updates
+    this.intervalIds.push(setInterval(this.blockCounter.bind(this), 5000));
   }
 
   render() {
