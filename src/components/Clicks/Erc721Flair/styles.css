@@ -1,0 +1,21 @@
+.click-graphic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 250px;
+    margin: 10px;
+}
+
+.click-graphic .info {
+    color: #ffffff;
+    padding: 4px;
+}
+
+.click-graphic .block-number {
+    padding: 16px;
+    font-size: 72px;
+    color: #ffffff;
+    font-weight: bold;
+}
