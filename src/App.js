@@ -58,7 +58,7 @@ class App extends Component {
     });
   }
 
-  accountRefresher() {
+  getAccounts() {
     this.state.web3.eth.getAccounts((error, accounts) => {
       if (!error) {
         this.setState({ accounts: accounts});
@@ -66,7 +66,20 @@ class App extends Component {
     });
   }
 
-  blockCounter() {
+  getNetwork() {
+    this.state.web3.version.getNetwork((err, netId) => {
+      if (!err) {
+        try {
+          var networkId = parseInt(netId, 10);
+          this.setState({networkId: networkId});
+        } catch (e) {
+          console.log('Failed to query Ethereum Network. ' + e);
+        }
+      }
+    });
+  }
+
+  getLatestBlock() {
     this.state.web3.eth.getBlock('latest', (error, result) => {
       if (!error) {
         console.log('latest: ', result.number, result.timestamp);
@@ -111,23 +124,14 @@ class App extends Component {
       });
     });
 
-    // Get accounts.
-    this.intervalIds.push(setInterval(this.accountRefresher.bind(this), 250));
+    // Monitor accounts changes/unlocks
+    this.intervalIds.push(setInterval(this.getAccounts.bind(this), 250));
 
-    // Get active network
-    this.state.web3.version.getNetwork((err, netId) => {
-      if (!err) {
-        try {
-          var networkId = parseInt(netId, 10);
-          this.setState({networkId: networkId});
-        } catch (e) {
-          console.log('Failed to query Ethereum Network. ' + e);
-        }
-      }
-    });
+    // Monitor for Ethereum Network changes
+    this.intervalIds.push(setInterval(this.getNetwork.bind(this), 1000));
 
-    // Watch for block updates
-    this.intervalIds.push(setInterval(this.blockCounter.bind(this), 5000));
+    // Monitor for block updates
+    this.intervalIds.push(setInterval(this.getLatestBlock.bind(this), 5000));
   }
 
   render() {

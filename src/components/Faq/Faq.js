@@ -6,7 +6,7 @@ class Faq extends Component {
     render() {
         return(
             <div>
-                <h2>Faq</h2>
+                <h1>Faq</h1>
                 <p><b>Faq Item 1</b></p>
                 <p>Faq Content</p>
                 <p><b>Faq Item 2</b></p>

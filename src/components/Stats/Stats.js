@@ -7,9 +7,9 @@ class Stats extends Component {
     render() {
         return(
             <div>
-                <h2>Stats</h2>
-                <p>Game Generation: {this.props.gameGeneration}. (Expected Value is 1. Try running truffle compile/migrate or restarting Chrome if you're seeing 0/-1.</p>
-                <p>Total Clicks: {this.props.clicks}. Expected Value is 0.</p>
+                <h1>Stats</h1>
+                <p>Game Generation: <b>{this.props.gameGeneration}</b></p>
+                <p>Total Clicks: <b>{this.props.clicks}</b></p>
             </div>
         );
     }
