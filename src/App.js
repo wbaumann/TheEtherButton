@@ -26,6 +26,9 @@ class App extends Component {
       hasWeb3: false,
       accounts: null,
       networkId: -1,
+      currentBlockNumber: 0,
+      victoryBlockNumer: 20,
+      requiredBlocksElapsedForVictory: 20,
     }
     this.intervalIds = [];
   }
@@ -69,6 +72,11 @@ class App extends Component {
         console.log('latest: ', result.number, result.timestamp)
       }
     });
+  }
+
+  testCounter() {
+    console.log('test counter: ' + this.state.currentBlockNumber);
+    this.setState({currentBlockNumber: this.state.currentBlockNumber + 1});
   }
 
   instantiateContract(web3) {
@@ -121,6 +129,9 @@ class App extends Component {
 
     // Watch for block updates
     this.intervalIds.push(setInterval(this.blockCounter.bind(this), 5000));
+
+    // TODO: Delete once testing complete
+    this.intervalIds.push(setInterval(this.testCounter.bind(this), 1000));
   }
 
   render() {
@@ -132,7 +143,9 @@ class App extends Component {
         <main className="container">
           <div className="item" >
             <Hero />
-            <TheButton />
+            <TheButton currentBlockNumber={this.state.currentBlockNumber} 
+              victoryBlockNumber={this.state.victoryBlockNumer} 
+              requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} />
             <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} />
             <Clicks />
             <Faq />
