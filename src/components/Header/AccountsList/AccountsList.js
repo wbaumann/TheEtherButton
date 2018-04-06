@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { User } from 'react-feather'
-import Account from '../Account/Account'
-import Network from '../Network/Network'
+import Account from './Account/Account'
+import Network from './Network/Network'
 
 import './styles.css'
 

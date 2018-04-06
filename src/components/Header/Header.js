@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AccountsList from '../AccountsList/AccountsList'
+import AccountsList from './AccountsList/AccountsList'
 
 import '../../css/oswald.css'
 import '../../css/open-sans.css'
