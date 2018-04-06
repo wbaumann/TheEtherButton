@@ -1,0 +1,7 @@
+.circular-countdown-timer {
+    cursor: pointer;
+}
+
+.circular-countdown-timer:not(.no-hover):hover {
+    transform: scale(1.1);
+}

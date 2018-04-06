@@ -42,7 +42,7 @@ class CircularCountdownTimer extends Component {
         this.countdownText.textBaseline = 'middle';
         this.countdownText.scale(this.scale, this.scale);
         if (this.props.onClick) {
-            this.refs.component.addEventListener('click', this.props.onClick());
+            this.refs.component.addEventListener('click', this.props.onClick);
         }
     }
 
@@ -86,9 +86,11 @@ class CircularCountdownTimer extends Component {
         const canvasStyle = { position: 'absolute', width: this.props.size, height: this.props.size }
         const canvasProps = { style: canvasStyle, height: this.props.size * this.scale, width: this.props.size * this.scale }
         return(
-            <div ref='component' style={{width: this.props.size, height: this.props.size}}>
-                <canvas ref='background' {...canvasProps}></canvas>
-                <canvas ref='countdownText' {...canvasProps}></canvas>
+            <div className="circular-countdown-timer" >
+                <div ref='component' style={{width: this.props.size, height: this.props.size}}>
+                    <canvas ref='background' {...canvasProps}></canvas>
+                    <canvas ref='countdownText' {...canvasProps}></canvas>
+                </div>
             </div>
         );
     }
@@ -106,7 +108,7 @@ CircularCountdownTimer.propTypes = {
 CircularCountdownTimer.defaultProps = {
     maximumValue: 20,
     currentValue: 20,
-    size: 300,
+    size: 200,
     color: '#0000ff',
     alpha: 1
 };

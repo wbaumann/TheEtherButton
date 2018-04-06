@@ -61,7 +61,7 @@ class App extends Component {
   accountRefresher() {
     this.state.web3.eth.getAccounts((error, accounts) => {
       if (!error) {
-        this.setState({ accounts: accounts})
+        this.setState({ accounts: accounts});
       }
     });
   }
@@ -69,14 +69,13 @@ class App extends Component {
   blockCounter() {
     this.state.web3.eth.getBlock('latest', (error, result) => {
       if (!error) {
-        console.log('latest: ', result.number, result.timestamp)
+        console.log('latest: ', result.number, result.timestamp);
       }
     });
   }
 
-  testCounter() {
-    console.log('test counter: ' + this.state.currentBlockNumber);
-    this.setState({currentBlockNumber: this.state.currentBlockNumber + 1});
+  onButtonClicked() {
+    console.log('The user clicked the button');
   }
 
   instantiateContract(web3) {
@@ -129,9 +128,6 @@ class App extends Component {
 
     // Watch for block updates
     this.intervalIds.push(setInterval(this.blockCounter.bind(this), 5000));
-
-    // TODO: Delete once testing complete
-    this.intervalIds.push(setInterval(this.testCounter.bind(this), 1000));
   }
 
   render() {
@@ -143,11 +139,12 @@ class App extends Component {
         <main className="container">
           <div className="item" >
             <Hero />
-            <TheButton currentBlockNumber={this.state.currentBlockNumber} 
+            <TheButton onClick={this.onButtonClicked}
+              currentBlockNumber={this.state.currentBlockNumber} 
               victoryBlockNumber={this.state.victoryBlockNumer} 
               requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} />
-            <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} />
             <Clicks />
+            <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} />
             <Faq />
           </div>
         </main>

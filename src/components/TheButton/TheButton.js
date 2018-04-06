@@ -12,9 +12,11 @@ class TheButton extends Component {
 
     render() {
         return(
-            <div className="pure-u-1-1">
-              <CircularCountdownTimer maximumValue={this.props.requiredBlocksElapsedForVictory} 
-                currentValue={this.getRemainingBlockCount()} />
+            <div className="the-button-container">
+                <CircularCountdownTimer
+                    onClick={this.props.onClick}
+                    maximumValue={this.props.requiredBlocksElapsedForVictory} 
+                    currentValue={this.getRemainingBlockCount()} />
             </div>
         );
     }
@@ -23,7 +25,8 @@ class TheButton extends Component {
 TheButton.propTypes = {
     currentBlockNumber: PropTypes.number,
     victoryBlockNumer: PropTypes.number,
-    requiredBlocksElapsedForVictory: PropTypes.number
+    requiredBlocksElapsedForVictory: PropTypes.number,
+    onClick: PropTypes.func
 };
 
 TheButton.defaultProps = {
