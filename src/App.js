@@ -135,6 +135,13 @@ class App extends Component {
   }
 
   render() {
+
+    const erc721Clicks = [
+      {blocksAwayFromDesiredBlock: 16, clickTime:1273185387, clickGeneration: 1},
+      {blocksAwayFromDesiredBlock: 11, clickTime:1276185387, clickGeneration: 2},
+      {blocksAwayFromDesiredBlock: 5, clickTime:1289185387, clickGeneration: 3},
+    ]
+
     return (
       <div className="app">
         <Header accounts={this.state.accounts} networkId={this.state.networkId} />
@@ -147,7 +154,7 @@ class App extends Component {
               currentBlockNumber={this.state.currentBlockNumber} 
               victoryBlockNumber={this.state.victoryBlockNumer} 
               requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} />
-            <Clicks />
+            <Clicks erc721Clicks={erc721Clicks}/>
             <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} />
             <Faq />
           </div>
