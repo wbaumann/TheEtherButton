@@ -87,6 +87,10 @@ class App extends Component {
     });
   }
 
+  test() {
+    this.setState({currentBlockNumber: this.state.currentBlockNumber + 1})
+  }
+
   onButtonClicked() {
     console.log('The user clicked the button');
   }
@@ -132,6 +136,8 @@ class App extends Component {
 
     // Monitor for block updates
     this.intervalIds.push(setInterval(this.getLatestBlock.bind(this), 5000));
+
+    this.intervalIds.push(setInterval(this.test.bind(this), 1000));
   }
 
   render() {

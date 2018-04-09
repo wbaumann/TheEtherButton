@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CircularCountdownTimer from './CircularCountdownTimer/CircularCountdownTimer';
+import GameColors from '../../utils/GameColors'
 
 import './styles.css'
 
@@ -16,7 +17,8 @@ class TheButton extends Component {
                 <CircularCountdownTimer
                     onClick={this.props.onClick}
                     maximumValue={this.props.requiredBlocksElapsedForVictory} 
-                    currentValue={this.getRemainingBlockCount()} />
+                    currentValue={this.getRemainingBlockCount()}
+                    color={GameColors.getColor(this.getRemainingBlockCount())} />
             </div>
         );
     }
