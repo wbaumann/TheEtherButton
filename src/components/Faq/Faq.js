@@ -19,7 +19,7 @@ class Faq extends Component {
                         <li>Ether, a "cryptocurrency" that powers the <a target="_blank" href="https://www.ethereum.org/">Ethereum</a> blockchain, which runs this game.</li>
                     </ul>
                     <p>The video below will guide you through how install MetaMask:</p>
-                    <p className="iframe-center"><iframe width="560" height="315" align="middle" src="https://www.youtube-nocookie.com/embed/tfETpi-9ORs" frameBorder="0" allowFullScreen></iframe></p>
+                    <p className="iframe-center"><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/tfETpi-9ORs" frameBorder="0" allowFullScreen></iframe></p>
                 </FaqItem>
                 <FaqItem title="What are the rules?">
                     <p>All game rules have been codified in an Ethereum <a target="_blank" href="https://www.coindesk.com/information/ethereum-smart-contracts-work/">Smart Contract</a>:</p>
