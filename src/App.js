@@ -1,27 +1,28 @@
-import React, { Component } from 'react'
-import ButtonClickGameContract from '../build/contracts/ButtonClickGameContract.json'
-import getWeb3 from './utils/getWeb3'
-import Header from './components/Header/Header'
-import Tooltip from './components/Tooltip/Tooltip'
-import Hero from './components/Hero/Hero'
-import TheButton from './components/TheButton/TheButton'
-import Stats from './components/Stats/Stats'
-import Clicks from './components/Clicks/Clicks'
-import Faq from './components/Faq/Faq'
-import Footer from './components/Footer/Footer'
+import React, { Component } from 'react';
+import ButtonClickGameContract from '../build/contracts/ButtonClickGameContract.json';
+import getWeb3 from './utils/getWeb3';
+import Header from './components/Header/Header';
+import Tooltip from './components/Tooltip/Tooltip';
+import Hero from './components/Hero/Hero';
+import TheButton from './components/TheButton/TheButton';
+import Stats from './components/Stats/Stats';
+import Clicks from './components/Clicks/Clicks';
+import Faq from './components/Faq/Faq';
+import Footer from './components/Footer/Footer';
 
-import './css/oswald.css'
-import './css/open-sans.css'
-import './css/pure-min.css'
-import './App.css'
+import './css/oswald.css';
+import './css/open-sans.css';
+import './css/pure-min.css';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props)
 
+    // TODO: Use a better state management tool instead of just saving everything heres
     this.state = {
       gameGeneration: -1,
-      clicks: 0,
+      totalSupply: 0,
       web3: null,
       hasWeb3: false,
       accounts: null,
@@ -31,6 +32,7 @@ class App extends Component {
       requiredBlocksElapsedForVictory: 20,
       lastErc721Clicks: null,
     }
+    
     this.intervalIds = [];
     this.onButtonClickedBinding = this.onButtonClicked.bind(this);
   }
@@ -84,18 +86,22 @@ class App extends Component {
   getLatestBlock() {
     this.state.web3.eth.getBlock('latest', (error, result) => {
       if (!error) {
-        console.log('latest: ', result.number, result.timestamp);
+        this.setState({currentBlockNumber: result.number});
+        console.log('Updating the latest ETH block number: ', result.number);
       }
     });
   }
 
-  getLastClicks() {
+  getButtonClickGame() {
     const contract = require('truffle-contract');
     const buttonClickGame = contract(ButtonClickGameContract);
     buttonClickGame.setProvider(this.state.web3.currentProvider);
+    return buttonClickGame;
+  }
 
-    // Declaring this for later so we can chain functions on SimpleStorage.
-    var buttonClickGameInstance;
+  getLastClicks() {
+    let buttonClickGame = this.getButtonClickGame();
+    var buttonClickGameInstance; // For access in promise blocks
 
     this.state.web3.eth.getAccounts((error, accounts) => {
       if (!error && accounts && accounts.length > 0) {
@@ -108,6 +114,10 @@ class App extends Component {
         })
         .then((totalSupplyResult) => {
           let totalSupply = totalSupplyResult.c[0];
+          this.setState({totalSupply: totalSupply});
+          return totalSupply;
+        })
+        .then((totalSupply) => {
           let promises = [];
           // Get our last 3 clicks
           if (totalSupply >= 3) {
@@ -122,6 +132,7 @@ class App extends Component {
           return Promise.all(promises);
         })
         .then((clickMetadataArray) => {
+          // Assemble each into an erc721click object
           let lastErc721Clicks = [];
           clickMetadataArray.forEach(clickMetadata => {
             let lastErc721Click = {
@@ -143,18 +154,10 @@ class App extends Component {
     });
   }
 
-  test() {
-    this.setState({currentBlockNumber: this.state.currentBlockNumber + 1})
-  }
-
   onButtonClicked() {
     if (this.state.web3) {
-      const contract = require('truffle-contract')
-      const buttonClickGame = contract(ButtonClickGameContract)
-      buttonClickGame.setProvider(this.state.web3.currentProvider)
-
-      // Declaring this for later so we can chain functions on SimpleStorage.
-      var buttonClickGameInstance;
+      let buttonClickGame = this.getButtonClickGame();
+      var buttonClickGameInstance; // For access in promise blocks
 
       this.state.web3.eth.getAccounts((error, accounts) => {
         if (!error && accounts && accounts.length > 0) {
@@ -210,24 +213,27 @@ class App extends Component {
       });
     });
 
-    // Monitor accounts changes/unlocks
+    // Define how frequently we check account settings and network state
+    const web3RefreshInterval = 500;
+
+    // Monitor account changes/unlocks
     this.getAccounts();
-    this.intervalIds.push(setInterval(this.getAccounts.bind(this), 250));
+    this.intervalIds.push(setInterval(this.getAccounts.bind(this), web3RefreshInterval));
 
     // Monitor for Ethereum Network changes
     this.getNetwork();
-    this.intervalIds.push(setInterval(this.getNetwork.bind(this), 1000));
+    this.intervalIds.push(setInterval(this.getNetwork.bind(this), web3RefreshInterval));
+
+    // Define how frequently we check out Smart Contract
+    const smartContractRefreshInterval = 5000;
 
     // Monitor for block updates
     this.getLatestBlock();
-    this.intervalIds.push(setInterval(this.getLatestBlock.bind(this), 5000));
+    this.intervalIds.push(setInterval(this.getLatestBlock.bind(this), smartContractRefreshInterval));
 
     // Monitor for the last button clicks
     this.getLastClicks();
-    this.intervalIds.push(setInterval(this.getLastClicks.bind(this), 1000));
-
-    // Test monitor
-    this.intervalIds.push(setInterval(this.test.bind(this), 10000));
+    this.intervalIds.push(setInterval(this.getLastClicks.bind(this), smartContractRefreshInterval));
   }
 
   render() {
@@ -254,7 +260,7 @@ class App extends Component {
               victoryBlockNumber={this.state.victoryBlockNumer} 
               requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} />
             {myErc721Clicks && <Clicks erc721Clicks={myErc721Clicks}/> }
-            <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} erc721Clicks={this.state.lastErc721Clicks} />
+            <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.totalSupply} erc721Clicks={this.state.lastErc721Clicks} />
             <Faq />
           </div>
         </main>

@@ -12,7 +12,7 @@ class Faq extends Component {
                     <p><a target="_blank" href="https://en.wikipedia.org/wiki/The_Button_(Reddit)">The Button was an online meta-game and social experiment that featured an online button and 60 second countdown timer that would reset each time the button was pressed</a>. We thought it would be fun to re-create the same concept but on the Ethereum blockchain.</p>
                 </FaqItem>
                 <FaqItem title="How can I play?">
-                    <p>Here’s what you need to play:</p>
+                    <p>Here’s what you need to get started:</p>
                     <ul>
                         <li>A computer with <a target="_blank" href="https://www.google.com/chrome/browser/features.html">Chrome</a> or <a target="_blank" href="https://www.mozilla.org/firefox">Firefox</a></li>
                         <li><a target="_blank" href="https://metamask.io/">MetaMask</a>, a digital wallet used for Ethereum apps</li>

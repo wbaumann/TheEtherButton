@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CircularCountdownTimer from './CircularCountdownTimer/CircularCountdownTimer';
-import GameColors from '../../utils/GameColors'
+import GameColors from '../../utils/GameColors';
 
-import './styles.css'
+import './styles.css';
 
 class TheButton extends Component {
 
