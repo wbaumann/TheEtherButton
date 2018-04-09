@@ -31,6 +31,8 @@ class App extends Component {
       requiredBlocksElapsedForVictory: 20,
     }
     this.intervalIds = [];
+
+    this.onButtonClickedBinding = this.onButtonClicked.bind(this);
   }
 
   componentWillMount() {
@@ -92,7 +94,33 @@ class App extends Component {
   }
 
   onButtonClicked() {
-    console.log('The user clicked the button');
+    if (this.state.web3) {
+      const contract = require('truffle-contract')
+      const buttonClickGame = contract(ButtonClickGameContract)
+      buttonClickGame.setProvider(this.state.web3.currentProvider)
+
+      // Declaring this for later so we can chain functions on SimpleStorage.
+      var buttonClickGameInstance;
+
+      this.state.web3.eth.getAccounts((error, accounts) => {
+        if (!error && accounts && accounts.length > 0) {
+          let account = accounts[0];
+          buttonClickGame.deployed().then((instance) => {
+            buttonClickGameInstance = instance;
+            return instance;
+          }).then((result) => {
+            // Get the value from the contract to prove it worked.
+            // return buttonClickGameInstance.clickButton({from: account, value: 1000000000000000, gas: 25000});
+            this.state.web3.eth.sendTransaction({from: account, to: buttonClickGameInstance.address, value: 1000000000000000, gas: 25000});
+
+            return "";
+          })
+          .catch(e => {
+            console.log('Failed to send this Tx. ' + e);
+          });
+        }
+      });
+    }
   }
 
   instantiateContract(web3) {
@@ -137,7 +165,7 @@ class App extends Component {
     // Monitor for block updates
     this.intervalIds.push(setInterval(this.getLatestBlock.bind(this), 5000));
 
-    this.intervalIds.push(setInterval(this.test.bind(this), 1000));
+    this.intervalIds.push(setInterval(this.test.bind(this), 10000));
   }
 
   render() {
@@ -156,7 +184,7 @@ class App extends Component {
         <main className="container">
           <div className="item" >
             <Hero />
-            <TheButton onClick={this.onButtonClicked}
+            <TheButton onClick={this.onButtonClickedBinding}
               currentBlockNumber={this.state.currentBlockNumber} 
               victoryBlockNumber={this.state.victoryBlockNumer} 
               requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} />

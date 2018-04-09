@@ -12,7 +12,7 @@ contract ButtonClickGameContract is ButtonClickGame {
         addRole(msg.sender, ROLE_ADMIN);
         addRole(msg.sender, ROLE_FINANCE);
 
-        minimumFee = 10000000000000000; // 0.01 ETH (hopefully low enough to not deter users, but high enough to avoid bots)
+        minimumFee = 1000000000000000; // 0.001 ETH (hopefully low enough to not deter users, but high enough to avoid bots)
         requiredBlocksElapsedForVictory = 20; // 20 blocks must elapse to win
     }    
 
