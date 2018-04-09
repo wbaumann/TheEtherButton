@@ -1,0 +1,6 @@
+.click-flairs {
+    display: flex;
+    display: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
