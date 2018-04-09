@@ -29,9 +29,9 @@ class App extends Component {
       currentBlockNumber: 0,
       victoryBlockNumer: 20,
       requiredBlocksElapsedForVictory: 20,
+      lastErc721Clicks: null,
     }
     this.intervalIds = [];
-
     this.onButtonClickedBinding = this.onButtonClicked.bind(this);
   }
 
@@ -85,6 +85,60 @@ class App extends Component {
     this.state.web3.eth.getBlock('latest', (error, result) => {
       if (!error) {
         console.log('latest: ', result.number, result.timestamp);
+      }
+    });
+  }
+
+  getLastClicks() {
+    const contract = require('truffle-contract')
+    const buttonClickGame = contract(ButtonClickGameContract)
+    buttonClickGame.setProvider(this.state.web3.currentProvider)
+
+    // Declaring this for later so we can chain functions on SimpleStorage.
+    var buttonClickGameInstance;
+
+    this.state.web3.eth.getAccounts((error, accounts) => {
+      if (!error && accounts && accounts.length > 0) {
+        let account = accounts[0];
+        buttonClickGame.deployed().then((instance) => {
+          buttonClickGameInstance = instance;
+          return instance;
+        }).then((instance) => {
+          return buttonClickGameInstance.totalSupply.call(account);
+        })
+        .then((totalSupplyResult) => {
+          let totalSupply = totalSupplyResult.c[0];
+          let promises = [];
+          // Get our last 3 clicks
+          if (totalSupply >= 3) {
+            promises.push(buttonClickGameInstance.getClickMetadata.call(totalSupply - 3, {from: account}));
+          }
+          if (totalSupply >= 2) {
+            promises.push(buttonClickGameInstance.getClickMetadata.call(totalSupply - 2, {from: account}));
+          }
+          if (totalSupply >= 1) {
+            promises.push(buttonClickGameInstance.getClickMetadata.call(totalSupply - 1, {from: account}));
+          }
+          return Promise.all(promises);
+        })
+        .then((clickMetadataArray) => {
+          let lastErc721Clicks = [];
+          clickMetadataArray.forEach(clickMetadata => {
+            let lastErc721Click = {
+              blocksAwayFromDesiredBlock: clickMetadata[0].c[0],
+              clickTime: clickMetadata[1].c[0],
+              clickGeneration: clickMetadata[2].c[0]
+            };
+            lastErc721Clicks.push(lastErc721Click);
+          });
+          return lastErc721Clicks;
+        })
+        .then((lastErc721Clicks) => {
+          return this.setState({lastErc721Clicks: lastErc721Clicks});
+        })
+        .catch(e => {
+          console.log('Failed to retrieve the last erc721 tokens generated. ' + e);
+        });
       }
     });
   }
@@ -165,16 +219,23 @@ class App extends Component {
     // Monitor for block updates
     this.intervalIds.push(setInterval(this.getLatestBlock.bind(this), 5000));
 
+    // Monitor for the last button clicks
+    this.intervalIds.push(setInterval(this.getLastClicks.bind(this), 1000));
+
+    // Test monitor
     this.intervalIds.push(setInterval(this.test.bind(this), 10000));
   }
 
   render() {
 
-    const erc721Clicks = [
+    const myErc721Clicks = null;
+    /*
+    const myErc721Clicks = [
       {blocksAwayFromDesiredBlock: 16, clickTime:1273185387, clickGeneration: 1},
       {blocksAwayFromDesiredBlock: 11, clickTime:1276185387, clickGeneration: 2},
       {blocksAwayFromDesiredBlock: 5, clickTime:1289185387, clickGeneration: 3},
     ]
+    */
 
     return (
       <div className="app">
@@ -188,8 +249,8 @@ class App extends Component {
               currentBlockNumber={this.state.currentBlockNumber} 
               victoryBlockNumber={this.state.victoryBlockNumer} 
               requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} />
-            {erc721Clicks && <Clicks erc721Clicks={erc721Clicks}/> }
-            <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} erc721Clicks={erc721Clicks} />
+            {myErc721Clicks && <Clicks erc721Clicks={myErc721Clicks}/> }
+            <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} erc721Clicks={this.state.lastErc721Clicks} />
             <Faq />
           </div>
         </main>
