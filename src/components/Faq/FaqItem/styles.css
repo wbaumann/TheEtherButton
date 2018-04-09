@@ -1,0 +1,15 @@
+.title-content {
+    padding-bottom: 4px;
+}
+.child-content {
+    padding-bottom: 8px;
+}
+.child-content p {
+    padding-bottom: 5px;
+}
+.child-content ul, ol {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

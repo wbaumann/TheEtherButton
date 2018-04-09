@@ -7,8 +7,8 @@ class FaqItem extends Component {
     render() {
         return(
             <div>
-                <h2>{this.props.title}</h2>
-                <div>{this.props.children}</div>
+                <h2 className="title-content">{this.props.title}</h2>
+                <div className="child-content">{this.props.children}</div>
             </div>
         );
     }
