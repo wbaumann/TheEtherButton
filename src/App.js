@@ -160,8 +160,8 @@ class App extends Component {
               currentBlockNumber={this.state.currentBlockNumber} 
               victoryBlockNumber={this.state.victoryBlockNumer} 
               requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} />
-            <Clicks erc721Clicks={erc721Clicks}/>
-            <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} />
+            {erc721Clicks && <Clicks erc721Clicks={erc721Clicks}/> }
+            <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.clicks} erc721Clicks={erc721Clicks} />
             <Faq />
           </div>
         </main>
