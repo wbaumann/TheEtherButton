@@ -33,6 +33,9 @@ Once complete, you can start `npm` as usual to test your development work:
 $ npm run start
 ```
 
+## Launching
+Once the game has been deployed, the "owner" address is responsible for starting the game via the `.startGame()` Solidity function.
+
 ## License
 
 ```
