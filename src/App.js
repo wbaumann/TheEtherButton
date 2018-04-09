@@ -90,9 +90,9 @@ class App extends Component {
   }
 
   getLastClicks() {
-    const contract = require('truffle-contract')
-    const buttonClickGame = contract(ButtonClickGameContract)
-    buttonClickGame.setProvider(this.state.web3.currentProvider)
+    const contract = require('truffle-contract');
+    const buttonClickGame = contract(ButtonClickGameContract);
+    buttonClickGame.setProvider(this.state.web3.currentProvider);
 
     // Declaring this for later so we can chain functions on SimpleStorage.
     var buttonClickGameInstance;
@@ -211,15 +211,19 @@ class App extends Component {
     });
 
     // Monitor accounts changes/unlocks
+    this.getAccounts();
     this.intervalIds.push(setInterval(this.getAccounts.bind(this), 250));
 
     // Monitor for Ethereum Network changes
+    this.getNetwork();
     this.intervalIds.push(setInterval(this.getNetwork.bind(this), 1000));
 
     // Monitor for block updates
+    this.getLatestBlock();
     this.intervalIds.push(setInterval(this.getLatestBlock.bind(this), 5000));
 
     // Monitor for the last button clicks
+    this.getLastClicks();
     this.intervalIds.push(setInterval(this.getLastClicks.bind(this), 1000));
 
     // Test monitor
