@@ -25,7 +25,7 @@ class Faq extends Component {
                     <p>All game rules have been codified in an Ethereum <a target="_blank" href="https://www.coindesk.com/information/ethereum-smart-contracts-work/">Smart Contract</a>:</p>
                     <ul>
                         <li>Each time the button is clicked, it will reset the counter to 20 blocks.</li>
-                        <li>You will be awarded a unique <a target="_blank" href="http://erc721.org/">ERC-721</a> token, based on how close the counter is to Block 0.</li>
+                        <li>You will be awarded a unique <a target="_blank" href="http://erc721.org/">ERC-721</a> token, based on how close the counter is to Block 0 when you click it.</li>
                         <li>You may only click the button once per game round (ie generation).</li>
                         <li>The game ends once someone clicks the button at block 0. This increments the game "generation" and restarts the game. All players keep will retain ownership of all tokens at the end of a round.</li>
                     </ul>

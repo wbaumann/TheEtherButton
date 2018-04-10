@@ -249,16 +249,7 @@ class App extends Component {
             buttonClickGameInstance = instance;
             return instance;
           }).then((result) => {
-            
-            return new Promise(function(resolve, reject) {
-              web3.eth.sendTransaction({from: account, to: buttonClickGameInstance.address, value: 1000000000000000, gas: 25000}, (error, txHash) => {
-                if (!error) {
-                  resolve(txHash);
-                } else {
-                  reject(error);
-                }
-              });
-            });
+            return buttonClickGameInstance.clickButton({from: account, value: 1000000000000000});
           })
           .then((result) => {
             console.log('Successfully clicked the ether button: ', result);
