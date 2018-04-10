@@ -1,6 +1,6 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.21;
 
-import './ButtonClickRBAC.sol';
+import "./ButtonClickRBAC.sol";
 
 /*
  * @title Defines specific controls for game administrators
@@ -52,7 +52,7 @@ contract ButtonClickGameControls is ButtonClickRBAC {
      * @dev Withdraws the available balance. This may ONLY be called by the "finance" role
      */
     function withdrawBalance() external onlyFinance {
-        msg.sender.transfer(this.balance);
+        msg.sender.transfer(address(this).balance);
     }
     
 }

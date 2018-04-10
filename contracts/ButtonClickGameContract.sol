@@ -1,6 +1,6 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.21;
 
-import './ButtonClickGame.sol';
+import "./ButtonClickGame.sol";
 
 contract ButtonClickGameContract is ButtonClickGame {
 

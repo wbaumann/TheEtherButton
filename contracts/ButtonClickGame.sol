@@ -1,10 +1,10 @@
-pragma solidity ^0.4.18;
+pragma solidity ^0.4.21;
 
-import 'zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol';
-import 'zeppelin-solidity/contracts/math/Math.sol';
-import './ButtonClickGameControls.sol';
+import "zeppelin-solidity/contracts/token/ERC721/ERC721Token.sol";
+import "zeppelin-solidity/contracts/math/Math.sol";
+import "./ButtonClickGameControls.sol";
 
-contract ButtonClickGame is ERC721Token, ButtonClickGameControls {
+contract ButtonClickGame is ERC721Token("The Ether Button", "Butt"), ButtonClickGameControls {
 
     /**
      * @dev This event is fired whenever a user clicks on a button, thereby creating a click
@@ -103,10 +103,7 @@ contract ButtonClickGame is ERC721Token, ButtonClickGameControls {
         uint256 newClickId = clicks.push(_click) - 1;
 
         // Emit the click event
-        ButtonClick(
-            msg.sender,
-            newClickId
-        );
+        emit ButtonClick(msg.sender, newClickId);
 
         // Formally mint this token and transfer ownership
         _mint(msg.sender, newClickId);
