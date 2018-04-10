@@ -19,7 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    // TODO: Use a better state management tool instead of just saving everything heres
+    // TODO: Use a better state management tool instead of just saving everything here as a God object
     this.state = {
       gameGeneration: 0,
       totalSupply: 0,
@@ -237,11 +237,12 @@ class App extends Component {
   }
 
   onButtonClicked() {
-    if (this.state.web3) {
+    let web3 = this.state.web3;
+    if (web3) {
       let buttonClickGame = this.getButtonClickGame();
       var buttonClickGameInstance; // For access in promise blocks
 
-      this.state.web3.eth.getAccounts((error, accounts) => {
+      web3.eth.getAccounts((error, accounts) => {
         if (!error && accounts && accounts.length > 0) {
           let account = accounts[0];
           buttonClickGame.deployed().then((instance) => {
@@ -249,9 +250,18 @@ class App extends Component {
             return instance;
           }).then((result) => {
             
-            this.state.web3.eth.sendTransaction({from: account, to: buttonClickGameInstance.address, value: 1000000000000000, gas: 25000});
-
-            return "";
+            return new Promise(function(resolve, reject) {
+              web3.eth.sendTransaction({from: account, to: buttonClickGameInstance.address, value: 1000000000000000, gas: 25000}, (error, txHash) => {
+                if (!error) {
+                  resolve(txHash);
+                } else {
+                  reject(error);
+                }
+              });
+            });
+          })
+          .then((result) => {
+            console.log('Successfully clicked the ether button: ', result);
           })
           .catch(e => {
             console.log('Failed to send this Tx. ' + e);
@@ -310,8 +320,8 @@ class App extends Component {
               currentBlockNumber={this.state.currentBlockNumber} 
               victoryBlockNumber={this.state.victoryBlockNumer} 
               requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} />
-            {this.state.myErc721Clicks && <Clicks erc721Clicks={this.state.myErc721Clicks}/> }
-            {this.state.gameGeneration > 0 && <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.totalSupply} erc721Clicks={this.state.lastErc721Clicks} /> }
+            {this.state.myErc721Clicks && this.state.myErc721Clicks.length > 0 && <Clicks erc721Clicks={this.state.myErc721Clicks}/> }
+            {this.state.clicks > 0 && <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.totalSupply} erc721Clicks={this.state.lastErc721Clicks} /> }
             <Faq />
           </div>
         </main>

@@ -34,7 +34,12 @@ $ npm run start
 ```
 
 ## Launching
-Once the game has been deployed, the "owner" address is responsible for starting the game via the `.startGame()` Solidity function.
+
+Once the game has been deployed, you can start it via the Truffle contract via the following command by replacing the sample address with the contract one:
+
+```
+ButtonClickGameContract.at("0xd3adb33f...").startGame()
+```
 
 ## License
 
