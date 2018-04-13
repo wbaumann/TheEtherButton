@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Erc721Flair from './Erc721Flair/Erc721Flair'
+import Erc721Flair from './Erc721Flair/Erc721Flair';
 
-import './styles.css'
+import './styles.css';
 
 class ClickFlairs extends Component {
     render() {
