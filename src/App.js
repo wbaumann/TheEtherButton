@@ -31,7 +31,8 @@ class App extends Component {
       victoryBlockNumer: 20,
       requiredBlocksElapsedForVictory: 20,
       lastErc721Clicks: null,
-      myErc721Clicks: null
+      myErc721Clicks: null,
+      isButtonClickOccuring: false,
     }
     
     this.intervalIds = [];
@@ -175,6 +176,10 @@ class App extends Component {
           return this.readTokenMetadataAsPromise(tokens, account, buttonClickGameInstance);
         })
         .then((myErc721Clicks) => {
+          if (myErc721Clicks.length !== this.state.myErc721Clicks.length) {
+            console.log('Updating our state to hide the loading spinner for clicks');
+            this.setState({ isButtonClickOccuring: false });
+          }
           return this.setState({myErc721Clicks: myErc721Clicks});
         })
         .catch(e => {
@@ -266,7 +271,8 @@ class App extends Component {
             return buttonClickGameInstance.clickButton({from: account, value: 500000000000000});
           })
           .then((result) => {
-            console.log('Successfully clicked the ether button: ', result);
+            console.log('The user was able to successfully click the button');
+            return this.setState({ isButtonClickOccuring: true });
           })
           .catch(e => {
             console.log('Failed to send this Tx. ' + e);
@@ -324,7 +330,8 @@ class App extends Component {
             <TheButton onClick={this.onButtonClickedBinding}
               currentBlockNumber={this.state.currentBlockNumber} 
               victoryBlockNumber={this.state.victoryBlockNumer} 
-              requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} />
+              requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} 
+              showLoading={this.state.isButtonClickOccuring}/>
             {this.state.myErc721Clicks && this.state.myErc721Clicks.length > 0 && <Clicks erc721Clicks={this.state.myErc721Clicks}/> }
             {this.state.totalSupply > 0 && <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.totalSupply} erc721Clicks={this.state.lastErc721Clicks} /> }
             <Faq />
