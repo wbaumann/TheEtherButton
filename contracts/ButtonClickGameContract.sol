@@ -20,6 +20,7 @@ contract ButtonClickGameContract is ButtonClickGame {
      * @dev Officially starts the game and configures all initial details
      */
     function startGame() external onlyAdmin {
+        require(!started);
         started = true;
         blockNumberForVictory = block.number + requiredBlocksElapsedForVictory;
     }
