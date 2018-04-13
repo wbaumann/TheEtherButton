@@ -45,7 +45,7 @@ Saving artifacts...
 One the migration completes, you'll like see an output similar to what is shown above. Be sure to note the address to which the contract deployed (`0x4e72770760c011647d4873f60a3cf6cdea896cd8` in the example above). To simplify future interactions with this address, we recommend saving this as a local variable:
 
 ```bash
-truffle(develop)> var address = "0x4e72770760c011647d4873f60a3cf6cdea896cd8"
+truffle(develop)> address = "0x4e72770760c011647d4873f60a3cf6cdea896cd8"
 ```
 
 Once complete, you can start `npm` as usual to test your development work:
@@ -71,7 +71,7 @@ truffle(develop)> ButtonClickGameContract.at(address).clickButton({value: 050000
 Finally if you are on a local test network, you can simulate mined blocks by running the following command:
 
 ```bash
-truffle(develop)> ButtonClickGameContract.at(address).clickButton({value: 1000000000000000})
+truffle(develop)> web3.currentProvider.sendAsync({jsonrpc: "2.0", method: "evm_mine", id: 12345}, () => {})
 ```
 
 ## License
