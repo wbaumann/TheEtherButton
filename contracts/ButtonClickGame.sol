@@ -81,14 +81,21 @@ contract ButtonClickGame is ERC721Token("The Ether Button", "Butt"), ButtonClick
         // Immediately bump the user's last button click to this generation
         addressLastClickedForGeneration[msg.sender] = gameGeneration;
 
-        // We use max256 to ensure that 0 is the effective floor for elapsed blocks
-        uint256 _blocksAwayFromDesiredBlock = Math.max256(0, blockNumberForVictory - block.number);
+        // Ensure that 0 is the effective floor for elapsed blocks
+        // Math.max256 won't work due to integer underflow, which will give a huge number if block.number > blockNumberForVictory
+        uint256 _blocksAwayFromDesiredBlock;
+        if (blockNumberForVictory > block.number) {
+            _blocksAwayFromDesiredBlock = blockNumberForVictory - block.number;
+        } else {
+            _blocksAwayFromDesiredBlock = 0;
+        }
+
+        // Keep the local value before possibly incrementing it in the victory condition
         uint256 _generation = gameGeneration;
 
         // Victory condition!!
         if (_blocksAwayFromDesiredBlock == 0) {
             gameGeneration++;
-            requiredBlocksElapsedForVictory = requiredBlocksElapsedForVictory + gameGeneration;
         }
 
         // Update the blockNumber that is required for the next victory condition

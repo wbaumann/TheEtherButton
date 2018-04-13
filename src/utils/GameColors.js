@@ -35,7 +35,7 @@ class GameColors {
             case 1:
                 return "#4A148C";
             case 0:
-                return "#311B92";
+                return "#080808";
             default:
                 return "#673AB7";
         }
