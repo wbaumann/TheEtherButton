@@ -152,14 +152,27 @@ class App extends Component {
           buttonClickGameInstance = instance;
           return instance;
         }).then((instance) => {
-          return buttonClickGameInstance.tokensOf(account);
+          return buttonClickGameInstance.balanceOf.call(account, {from: account});
+        })
+        .then((balanceResult) => {
+          return balanceResult.c[0];
+        })
+        .then((balance) => {
+          let promises = [];
+          for (var ownedItem = 0; ownedItem < balance; ownedItem++) {
+            promises.push(buttonClickGameInstance.tokenOfOwnerByIndex.call(account, ownedItem, {from: account}));
+          }
+          return Promise.all(promises);
+        })
+        .then((tokensResults) => {
+          let tokens = [];
+          tokensResults.forEach(tokenResult => {
+            tokens.push(tokenResult.c[0]);
+          });
+          return tokens;
         })
         .then((tokens) => {
-          let tokenIds = [];
-          tokens.forEach(token => {
-            tokenIds.push(token.c[0]);
-          });
-          return this.readTokenMetadataAsPromise(tokenIds, account, buttonClickGameInstance);
+          return this.readTokenMetadataAsPromise(tokens, account, buttonClickGameInstance);
         })
         .then((myErc721Clicks) => {
           return this.setState({myErc721Clicks: myErc721Clicks});
@@ -312,7 +325,7 @@ class App extends Component {
               victoryBlockNumber={this.state.victoryBlockNumer} 
               requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} />
             {this.state.myErc721Clicks && this.state.myErc721Clicks.length > 0 && <Clicks erc721Clicks={this.state.myErc721Clicks}/> }
-            {this.state.clicks > 0 && <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.totalSupply} erc721Clicks={this.state.lastErc721Clicks} /> }
+            {this.state.totalSupply > 0 && <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.totalSupply} erc721Clicks={this.state.lastErc721Clicks} /> }
             <Faq />
           </div>
         </main>

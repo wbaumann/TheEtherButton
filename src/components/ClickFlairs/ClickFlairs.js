@@ -9,7 +9,7 @@ class ClickFlairs extends Component {
         return(
             <div >
                 <div className="click-flairs" >
-                    {this.props.erc721Clicks.map(erc721Click => <Erc721Flair {...erc721Click} key={erc721Click.clickGeneration} /> )} 
+                    {this.props.erc721Clicks.map(erc721Click => <Erc721Flair {...erc721Click} key={erc721Click.clickTime} /> )} 
                 </div>
             </div>
         );
