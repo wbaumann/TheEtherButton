@@ -30,8 +30,8 @@ class App extends Component {
       currentBlockNumber: 0,
       victoryBlockNumer: 20,
       requiredBlocksElapsedForVictory: 20,
-      lastErc721Clicks: null,
-      myErc721Clicks: null,
+      lastErc721Clicks: [],
+      myErc721Clicks: [],
       isButtonClickOccuring: false,
     }
     
@@ -144,6 +144,7 @@ class App extends Component {
 
   getTokenOwnership() {
     let buttonClickGame = this.getButtonClickGame();
+    let myExistingErc721Clicks = this.state.myErc721Clicks;
     var buttonClickGameInstance; // For access in promise blocks
 
     this.state.web3.eth.getAccounts((error, accounts) => {
@@ -176,7 +177,7 @@ class App extends Component {
           return this.readTokenMetadataAsPromise(tokens, account, buttonClickGameInstance);
         })
         .then((myErc721Clicks) => {
-          if (myErc721Clicks.length !== this.state.myErc721Clicks.length) {
+          if (myErc721Clicks.length !== myExistingErc721Clicks.length) {
             console.log('Updating our state to hide the loading spinner for clicks');
             this.setState({ isButtonClickOccuring: false });
           }
