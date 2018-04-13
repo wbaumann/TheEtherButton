@@ -262,7 +262,7 @@ class App extends Component {
             buttonClickGameInstance = instance;
             return instance;
           }).then((result) => {
-            return buttonClickGameInstance.clickButton({from: account, value: 1000000000000000});
+            return buttonClickGameInstance.clickButton({from: account, value: 500000000000000});
           })
           .then((result) => {
             console.log('Successfully clicked the ether button: ', result);

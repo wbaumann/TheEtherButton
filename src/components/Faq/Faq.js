@@ -35,7 +35,7 @@ class Faq extends Component {
                     <p>All click flairs have been designed as <a target="_blank" href="http://erc721.org/">ERC-721</a> tokens, which means that each will exist as a unique token that you own. In accordance with this standard, you're free to sell, collect, trade, or do anything else with your tokens. Please note that you still are only allowed to click the button a single time per game.</p>
                 </FaqItem>
                 <FaqItem title="What does it cost?">
-                    <p>Clicking the button costs a small amount (ie 0.001ETH) in order to discourage someone from creating 1000s of Ethereum accounts and constantly spamming this Smart Contract.</p>
+                    <p>Clicking the button costs a small amount (ie 0.0005ETH) in order to discourage someone from creating 1000s of Ethereum accounts and constantly spamming this Smart Contract to keep the button pinned at 20 blocks.</p>
                 </FaqItem>
                 <FaqItem title="Where's the code?" >
                     <p>All code is freely available on GitHub: <a target="_blank" href="https://github.com/wbaumann/TheEtherButton">TheEtherButton</a>.</p>
