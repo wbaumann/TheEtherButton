@@ -19,7 +19,8 @@ class TheButton extends Component {
                     onClick={this.props.onClick}
                     maximumValue={this.props.requiredBlocksElapsedForVictory} 
                     currentValue={this.getRemainingBlockCount()}
-                    color={GameColors.getColor(this.getRemainingBlockCount())} />
+                    color={GameColors.getColor(this.getRemainingBlockCount())}
+                    areButtonClicksAllowed={this.props.areButtonClicksAllowed} />
                 {this.props.showLoading && <Loading />}
             </div>
         );

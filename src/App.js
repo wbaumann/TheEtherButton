@@ -33,6 +33,7 @@ class App extends Component {
       lastErc721Clicks: [],
       myErc721Clicks: [],
       isButtonClickOccuring: false,
+      areButtonClicksAllowed: true
     }
     
     this.intervalIds = [];
@@ -181,6 +182,11 @@ class App extends Component {
             console.log('Updating our state to hide the loading spinner for clicks');
             this.setState({ isButtonClickOccuring: false });
           }
+          myErc721Clicks.forEach(myErc721Click => {
+            if (myErc721Click.clickGeneration === this.state.gameGeneration) {
+              this.setState({areButtonClicksAllowed: false});
+            }
+          })
           return this.setState({myErc721Clicks: myErc721Clicks});
         })
         .catch(e => {
@@ -257,29 +263,33 @@ class App extends Component {
   }
 
   onButtonClicked() {
-    let web3 = this.state.web3;
-    if (web3) {
-      let buttonClickGame = this.getButtonClickGame();
-      var buttonClickGameInstance; // For access in promise blocks
+    if (this.state.areButtonClicksAllowed) {
+      let web3 = this.state.web3;
+      if (web3) {
+        let buttonClickGame = this.getButtonClickGame();
+        var buttonClickGameInstance; // For access in promise blocks
 
-      web3.eth.getAccounts((error, accounts) => {
-        if (!error && accounts && accounts.length > 0) {
-          let account = accounts[0];
-          buttonClickGame.deployed().then((instance) => {
-            buttonClickGameInstance = instance;
-            return instance;
-          }).then((result) => {
-            return buttonClickGameInstance.clickButton({from: account, value: 500000000000000});
-          })
-          .then((result) => {
-            console.log('The user was able to successfully click the button');
-            return this.setState({ isButtonClickOccuring: true });
-          })
-          .catch(e => {
-            console.log('Failed to send this Tx. ' + e);
-          });
-        }
-      });
+        web3.eth.getAccounts((error, accounts) => {
+          if (!error && accounts && accounts.length > 0) {
+            let account = accounts[0];
+            buttonClickGame.deployed().then((instance) => {
+              buttonClickGameInstance = instance;
+              return instance;
+            }).then((result) => {
+              return buttonClickGameInstance.clickButton({from: account, value: 500000000000000});
+            })
+            .then((result) => {
+              console.log('The user was able to successfully click the button');
+              return this.setState({ isButtonClickOccuring: true });
+            })
+            .catch(e => {
+              console.log('Failed to send this Tx. ' + e);
+            });
+          }
+        });
+      }
+    } else {
+      console.log('The user already has pressed the button this generation. Ignoring this click')
     }
   }
 
@@ -332,7 +342,8 @@ class App extends Component {
               currentBlockNumber={this.state.currentBlockNumber} 
               victoryBlockNumber={this.state.victoryBlockNumer} 
               requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} 
-              showLoading={this.state.isButtonClickOccuring}/>
+              showLoading={this.state.isButtonClickOccuring}
+              areButtonClicksAllowed={this.state.areButtonClicksAllowed} />
             {this.state.myErc721Clicks && this.state.myErc721Clicks.length > 0 && <Clicks erc721Clicks={this.state.myErc721Clicks}/> }
             {this.state.totalSupply > 0 && <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.totalSupply} erc721Clicks={this.state.lastErc721Clicks} /> }
             <Faq />
