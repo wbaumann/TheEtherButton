@@ -6,6 +6,8 @@
     width: 250px;
     height: 250px;
     margin: 10px;
+    cursor: pointer;
+    box-sizing:border-box;
 }
 
 .click-graphic .info {
@@ -18,4 +20,16 @@
     font-size: 72px;
     color: #ffffff;
     font-weight: bold;
+}
+
+.nostyle:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
 }

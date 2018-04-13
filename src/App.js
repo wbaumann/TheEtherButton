@@ -197,7 +197,8 @@ class App extends Component {
                       let lastErc721Click = {
                         blocksAwayFromDesiredBlock: clickMetadata[0].c[0],
                         clickTime: clickMetadata[1].c[0],
-                        clickGeneration: clickMetadata[2].c[0]
+                        clickGeneration: clickMetadata[2].c[0],
+                        owner: clickMetadata[3]
                       };
                       lastErc721Clicks.push(lastErc721Click);
                     });

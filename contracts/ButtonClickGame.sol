@@ -126,13 +126,15 @@ contract ButtonClickGame is ERC721Token("The Ether Button", "Butt"), ButtonClick
     function getClickMetadata(uint256 _id) external view returns (
         uint256 blocksAwayFromDesiredBlock,
         uint256 clickTime,
-        uint256 clickGeneration
+        uint256 clickGeneration,
+        address owner
     ) {
         ButtonClickMetadata storage metadata = clicks[_id];
 
         blocksAwayFromDesiredBlock = uint256(metadata.blocksAwayFromDesiredBlock);
         clickTime = uint256(metadata.clickTime);
         clickGeneration = uint256(metadata.clickGeneration);
+        owner = ownerOf(_id);
     }
 
 }
