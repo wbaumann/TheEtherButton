@@ -10,35 +10,68 @@
 
 This project requires both [npm](https://www.npmjs.com/) and [truffle](https://github.com/trufflesuite/truffle). Once you have the former, you can install the latter via:
 
-```
-$ npm install -g truffle
+```bash
+npm install -g truffle
 ```
 
 Next, you'll need to launch truffle:
 
-```
-$ truffle develop
+```bash
+truffle develop
 ```
 
 To compile and deploy the Smart Contract:
 
-```
+```bash
 $ truffle(develop)> compile
 $ truffle(develop)> migrate
+
+Running migration: 1_initial_migration.js
+  Replacing Migrations...
+  ... 0xa259863eefa1dbe68d2d5ff04aa6a78081512e3f6d60b7b0725668562bdf3e1d
+  Migrations: 0xecfcab0a285d3380e488a39b4bb21e777f8a4eac
+Saving successful migration to network...
+  ... 0x64df98e7d3f1cf5dc7eaa5264011714bf49802d9fda56003e202434903c2581b
+Saving artifacts...
+Running migration: 2_deploy_contracts.js
+  Replacing ButtonClickGameContract...
+  ... 0x206e0085aa3ca351cce3cefef135cfaa5bf17c422c7c5281c67c203d2c3c9559
+  ButtonClickGameContract: 0x4e72770760c011647d4873f60a3cf6cdea896cd8
+Saving successful migration to network...
+  ... 0x2613896914f5d1eeaed6be42e3e0466d891206e27c197a7bac0078225f4d693a
+Saving artifacts...
+```
+
+One the migration completes, you'll like see an output similar to what is shown above. Be sure to note the address to which the contract deployed (`0x4e72770760c011647d4873f60a3cf6cdea896cd8` in the example above). To simplify future interactions with this address, we recommend saving this as a local variable:
+
+```bash
+truffle(develop)> var address = "0x4e72770760c011647d4873f60a3cf6cdea896cd8"
 ```
 
 Once complete, you can start `npm` as usual to test your development work:
 
-```
-$ npm run start
+```bash
+npm run start
 ```
 
 ## Launching
 
 Once the game has been deployed, you can start it via the Truffle contract via the following command by replacing the sample address with the contract one:
 
+```bash
+truffle(develop)> ButtonClickGameContract.at(address).startGame()
 ```
-ButtonClickGameContract.at("0xd3adb33f...").startGame()
+
+Button clicks can be initiated via the following command:
+
+```bash
+truffle(develop)> ButtonClickGameContract.at(address).clickButton({value: 0500000000000000})
+```
+
+Finally if you are on a local test network, you can simulate mined blocks by running the following command:
+
+```bash
+truffle(develop)> ButtonClickGameContract.at(address).clickButton({value: 1000000000000000})
 ```
 
 ## License
