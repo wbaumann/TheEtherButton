@@ -27,12 +27,12 @@ class Faq extends Component {
                         <li>Each time the button is clicked, it will reset the counter to 20 blocks.</li>
                         <li>You will be awarded a unique <a target="_blank" href="http://erc721.org/">ERC-721</a> token, based on how close the counter is to Block 0 when you click it.</li>
                         <li>You may only click the button once per game round (ie generation).</li>
-                        <li>The game ends once someone clicks the button at block 0. This increments the game "generation" and restarts the game. All players keep will retain ownership of all tokens at the end of a round.</li>
+                        <li>The game ends once someone clicks the button at block 0. This increments the game "generation" and restarts the game. You  will retain ownership of your tokens at the end of a round, but no new tokens can be minted for that generation.</li>
                     </ul>
                     <p>This game is intended to act as a type of social experiment, where anyone can reset the progress made by all other players.</p>
                 </FaqItem>
                 <FaqItem title="What can I do with my button click flairs?">
-                    <p>All click flairs have been designed as <a target="_blank" href="http://erc721.org/">ERC-721</a> tokens, which means that each will exist as a unique token that you own. In accordance with this standard, you're free to sell, collect, trade, or do anything else with your tokens. Please note that you still are only allowed to click the button a single time per game.</p>
+                    <p>All click flairs have been designed as <a target="_blank" href="http://erc721.org/">ERC-721</a> tokens, which means that each will exist as a unique token. In accordance with this standard, you're free to sell, collect, trade, or do anything else with your tokens. Please note that you still are only allowed to click the button a single time per game generation (i.e. you can only create a single token each round).</p>
                 </FaqItem>
                 <FaqItem title="What does it cost?">
                     <p>Clicking the button costs a small amount (ie 0.0005ETH) in order to discourage someone from creating 1000s of Ethereum accounts and constantly spamming this Smart Contract to keep the button pinned at 20 blocks.</p>
