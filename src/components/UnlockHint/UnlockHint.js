@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import './styles.css'
+import './styles.css';
 
 class UnlockHint extends Component {
-    render() {
-        return(
-            <div className="tooltip warning">
-                <p>Please unlock your MetaMask account to play this game.</p>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="tooltip warning">
+        <p>Please unlock your MetaMask account to play this game.</p>
+      </div>
+    );
+  }
 }
 
-export default UnlockHint
+export default UnlockHint;
