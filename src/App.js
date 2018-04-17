@@ -17,9 +17,10 @@ import './App.css';
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    // TODO: Use a better state management tool instead of just saving everything here as a God object
+    // TODO: Use a better state management tool instead of just saving everything
+    // here as a God object
     this.state = {
       gameGeneration: 0,
       totalSupply: 0,
@@ -33,9 +34,9 @@ class App extends Component {
       lastErc721Clicks: [],
       myErc721Clicks: [],
       isButtonClickOccuring: false,
-      areButtonClicksAllowed: true
-    }
-    
+      areButtonClicksAllowed: true,
+    };
+
     this.intervalIds = [];
     this.onButtonClickedBinding = this.onButtonClicked.bind(this);
   }
@@ -44,7 +45,7 @@ class App extends Component {
     // Get network provider and web3 instance.
     // See utils/getWeb3 for more info.
 
-    getWeb3.then(results => {
+    getWeb3.then((results) => {
       this.setState({ web3: results.web3, hasWeb3: results.web3 !== null });
 
       // Instantiate contract once web3 provided.
@@ -52,23 +53,52 @@ class App extends Component {
         this.instantiateContract(results.web3);
       }
     })
-    .catch(e => {
-      console.log('Error finding web3. ' + e)
-    });
-    
+      .catch((e) => {
+        console.log(`Error finding web3. ${e}`);
+      });
   }
 
   componentWillUnmount() {
-    this.intervalIds.forEach(id => {
-      console.log('Clearing id: ' + id);
+    this.intervalIds.forEach((id) => {
+      console.log(`Clearing id: ${id}`);
       clearInterval(this.intervalId);
     });
+  }
+
+  onButtonClicked() {
+    if (this.state.areButtonClicksAllowed) {
+      const { web3 } = this.state;
+      if (web3) {
+        const buttonClickGame = this.getButtonClickGame();
+        let buttonClickGameInstance; // For access in promise blocks
+
+        web3.eth.getAccounts((error, accounts) => {
+          if (!error && accounts && accounts.length > 0) {
+            const account = accounts[0];
+            buttonClickGame.deployed().then((instance) => {
+              buttonClickGameInstance = instance;
+              return instance;
+            }).then((result) => {
+              buttonClickGameInstance.clickButton({ from: account, value: 500000000000000 });
+            }).then((result) => {
+              console.log('The user was able to successfully click the button');
+              return this.setState({ isButtonClickOccuring: true });
+            })
+              .catch((e) => {
+                console.log(`Failed to send this Tx. ${e}`);
+              });
+          }
+        });
+      }
+    } else {
+      console.log('The user already has pressed the button this generation. Ignoring this click');
+    }
   }
 
   getAccounts() {
     this.state.web3.eth.getAccounts((error, accounts) => {
       if (!error) {
-        this.setState({ accounts: accounts});
+        this.setState({ accounts });
       }
     });
   }
@@ -77,10 +107,10 @@ class App extends Component {
     this.state.web3.version.getNetwork((err, netId) => {
       if (!err) {
         try {
-          var networkId = parseInt(netId, 10);
-          this.setState({networkId: networkId});
+          const networkId = parseInt(netId, 10);
+          this.setState({ networkId });
         } catch (e) {
-          console.log('Failed to query Ethereum Network. ' + e);
+          console.log(`Failed to query Ethereum Network. ${e}`);
         }
       }
     });
@@ -89,12 +119,13 @@ class App extends Component {
   getLatestBlock() {
     this.state.web3.eth.getBlock('latest', (error, result) => {
       if (!error) {
-        this.setState({currentBlockNumber: result.number});
+        this.setState({ currentBlockNumber: result.number });
       }
     });
   }
 
   getButtonClickGame() {
+    // eslint-disable-next-line
     const contract = require('truffle-contract');
     const buttonClickGame = contract(ButtonClickGameContract);
     buttonClickGame.setProvider(this.state.web3.currentProvider);
@@ -102,195 +133,156 @@ class App extends Component {
   }
 
   getLastClicks() {
-    let buttonClickGame = this.getButtonClickGame();
-    var buttonClickGameInstance; // For access in promise blocks
+    const buttonClickGame = this.getButtonClickGame();
+    let buttonClickGameInstance; // For access in promise blocks
 
     this.state.web3.eth.getAccounts((error, accounts) => {
       if (!error && accounts && accounts.length > 0) {
-        let account = accounts[0];
+        const account = accounts[0];
         buttonClickGame.deployed().then((instance) => {
           buttonClickGameInstance = instance;
           return instance;
-        }).then((instance) => {
-          return buttonClickGameInstance.totalSupply.call(account);
-        })
-        .then((totalSupplyResult) => {
-          let totalSupply = totalSupplyResult.c[0];
-          this.setState({totalSupply: totalSupply});
-          return totalSupply;
-        })
-        .then((totalSupply) => {
-          let tokenIds = [];
-          // Get our last 3 clicks
-          if (totalSupply >= 3) {
-            tokenIds.push(totalSupply - 3);
-          }
-          if (totalSupply >= 2) {
-            tokenIds.push(totalSupply - 2);
-          }
-          if (totalSupply >= 1) {
-            tokenIds.push(totalSupply - 1);
-          }
-          return this.readTokenMetadataAsPromise(tokenIds, account, buttonClickGameInstance);
-        })
-        .then((lastErc721Clicks) => {
-          return this.setState({lastErc721Clicks: lastErc721Clicks});
-        })
-        .catch(e => {
-          console.log('Failed to retrieve the last erc721 tokens generated. ' + e);
-        });
+        }).then(instance => buttonClickGameInstance.totalSupply.call(account))
+          .then((totalSupplyResult) => {
+            const totalSupply = totalSupplyResult.c[0];
+            this.setState({ totalSupply });
+            return totalSupply;
+          })
+          .then((totalSupply) => {
+            const tokenIds = [];
+            // Get our last 3 clicks
+            if (totalSupply >= 3) {
+              tokenIds.push(totalSupply - 3);
+            }
+            if (totalSupply >= 2) {
+              tokenIds.push(totalSupply - 2);
+            }
+            if (totalSupply >= 1) {
+              tokenIds.push(totalSupply - 1);
+            }
+            return this.readTokenMetadataAsPromise(tokenIds, account, buttonClickGameInstance);
+          })
+          .then(lastErc721Clicks => this.setState({ lastErc721Clicks }))
+          .catch((e) => {
+            console.log(`Failed to retrieve the last erc721 tokens generated. ${e}`);
+          });
       }
     });
   }
 
   getTokenOwnership() {
-    let buttonClickGame = this.getButtonClickGame();
-    let myExistingErc721Clicks = this.state.myErc721Clicks;
-    var buttonClickGameInstance; // For access in promise blocks
+    const buttonClickGame = this.getButtonClickGame();
+    const myExistingErc721Clicks = this.state.myErc721Clicks;
+    let buttonClickGameInstance; // For access in promise blocks
 
     this.state.web3.eth.getAccounts((error, accounts) => {
       if (!error && accounts && accounts.length > 0) {
-        let account = accounts[0];
+        const account = accounts[0];
         buttonClickGame.deployed().then((instance) => {
           buttonClickGameInstance = instance;
           return instance;
-        }).then((instance) => {
-          return buttonClickGameInstance.balanceOf.call(account, {from: account});
-        })
-        .then((balanceResult) => {
-          return balanceResult.c[0];
-        })
-        .then((balance) => {
-          let promises = [];
-          for (var ownedItem = 0; ownedItem < balance; ownedItem++) {
-            promises.push(buttonClickGameInstance.tokenOfOwnerByIndex.call(account, ownedItem, {from: account}));
-          }
-          return Promise.all(promises);
-        })
-        .then((tokensResults) => {
-          let tokens = [];
-          tokensResults.forEach(tokenResult => {
-            tokens.push(tokenResult.c[0]);
-          });
-          return tokens;
-        })
-        .then((tokens) => {
-          return this.readTokenMetadataAsPromise(tokens, account, buttonClickGameInstance);
-        })
-        .then((myErc721Clicks) => {
-          if (myErc721Clicks.length !== myExistingErc721Clicks.length) {
-            console.log('Updating our state to hide the loading spinner for clicks');
-            this.setState({ isButtonClickOccuring: false });
-          }
-          myErc721Clicks.forEach(myErc721Click => {
-            if (myErc721Click.clickGeneration === this.state.gameGeneration) {
-              this.setState({areButtonClicksAllowed: false});
+        }).then(instance => buttonClickGameInstance.balanceOf.call(account, { from: account }))
+          .then(balanceResult => balanceResult.c[0])
+          .then((balance) => {
+            const promises = [];
+            for (let ownedItem = 0; ownedItem < balance; ownedItem += 1) {
+              promises.push(buttonClickGameInstance.tokenOfOwnerByIndex.call(
+                account,
+                ownedItem,
+                { from: account },
+              ));
             }
+            return Promise.all(promises);
           })
-          return this.setState({myErc721Clicks: myErc721Clicks});
-        })
-        .catch(e => {
-          console.log('Failed to retrieve the last erc721 tokens generated. ' + e);
-        });
+          .then((tokensResults) => {
+            const tokens = [];
+            tokensResults.forEach((tokenResult) => {
+              tokens.push(tokenResult.c[0]);
+            });
+            return tokens;
+          })
+          .then(tokens => this.readTokenMetadataAsPromise(tokens, account, buttonClickGameInstance))
+          .then((myErc721Clicks) => {
+            if (myErc721Clicks.length !== myExistingErc721Clicks.length) {
+              console.log('Updating our state to hide the loading spinner for clicks');
+              this.setState({ isButtonClickOccuring: false });
+            }
+            myErc721Clicks.forEach((myErc721Click) => {
+              if (myErc721Click.clickGeneration === this.state.gameGeneration) {
+                this.setState({ areButtonClicksAllowed: false });
+              }
+            });
+            return this.setState({ myErc721Clicks });
+          })
+          .catch((e) => {
+            console.log(`Failed to retrieve the last erc721 tokens generated. ${e}`);
+          });
       }
     });
   }
 
-  readTokenMetadataAsPromise(tokenIds, account, buttonClickGameInstance) {
-    let promises = [];
-    tokenIds.forEach(tokenId => {
-      promises.push(buttonClickGameInstance.getClickMetadata.call(tokenId, {from: account}));
-    });
-    return Promise.all(promises)
-                  .then((clickMetadataArray) => {
-                    // Assemble each into an erc721click object
-                    let lastErc721Clicks = [];
-                    clickMetadataArray.forEach(clickMetadata => {
-                      let lastErc721Click = {
-                        blocksAwayFromDesiredBlock: clickMetadata[0].c[0],
-                        clickTime: clickMetadata[1].c[0],
-                        clickGeneration: clickMetadata[2].c[0],
-                        owner: clickMetadata[3]
-                      };
-                      lastErc721Clicks.push(lastErc721Click);
-                    });
-                    return lastErc721Clicks;
-                  });
-  }
-
   getGameGeneration() {
-    let buttonClickGame = this.getButtonClickGame();
-    var buttonClickGameInstance; // For access in promise blocks
+    const buttonClickGame = this.getButtonClickGame();
+    let buttonClickGameInstance; // For access in promise blocks
     this.state.web3.eth.getAccounts((error, accounts) => {
       if (!error && accounts && accounts.length > 0) {
-        let account = accounts[0];
+        const account = accounts[0];
         buttonClickGame.deployed().then((instance) => {
           buttonClickGameInstance = instance;
           return instance;
-        }).then((result) => {
-          return buttonClickGameInstance.gameGeneration.call(account);
-        }).then((result) => {
+        }).then(result => buttonClickGameInstance.gameGeneration.call(account)).then(result =>
           // Update state with the result.
-          return this.setState({ gameGeneration: result.c[0] });
-        })
-        .catch(e => {
-          console.log('Failed to fetch the current game generation. ' + e);
-        });
+          this.setState({ gameGeneration: result.c[0] }))
+          .catch((e) => {
+            console.log(`Failed to fetch the current game generation. ${e}`);
+          });
       }
     });
   }
 
   getBlockNumberForVictory() {
-    let buttonClickGame = this.getButtonClickGame();
-    var buttonClickGameInstance; // For access in promise blocks
+    const buttonClickGame = this.getButtonClickGame();
+    let buttonClickGameInstance; // For access in promise blocks
     this.state.web3.eth.getAccounts((error, accounts) => {
       if (!error && accounts && accounts.length > 0) {
-        let account = accounts[0];
+        const account = accounts[0];
         buttonClickGame.deployed().then((instance) => {
           buttonClickGameInstance = instance;
           return instance;
         }).then((result) => {
-          return buttonClickGameInstance.blockNumberForVictory.call(account);
+          buttonClickGameInstance.blockNumberForVictory.call(account);
         }).then((result) => {
           // Update state with the result.
-          return this.setState({ victoryBlockNumer: result.c[0] });
+          this.setState({ victoryBlockNumer: result.c[0] });
         })
-        .catch(e => {
-          console.log('Failed to fetch the block number for victory. ' + e);
-        });
+          .catch((e) => {
+            console.log(`Failed to fetch the block number for victory. ${e}`);
+          });
       }
     });
   }
 
-  onButtonClicked() {
-    if (this.state.areButtonClicksAllowed) {
-      let web3 = this.state.web3;
-      if (web3) {
-        let buttonClickGame = this.getButtonClickGame();
-        var buttonClickGameInstance; // For access in promise blocks
+  readTokenMetadataAsPromise(tokenIds, account, buttonClickGameInstance) {
+    const promises = [];
+    this.tokenIds.forEach((tokenId) => {
+      promises.push(buttonClickGameInstance.getClickMetadata.call(tokenId, { from: account }));
+    });
 
-        web3.eth.getAccounts((error, accounts) => {
-          if (!error && accounts && accounts.length > 0) {
-            let account = accounts[0];
-            buttonClickGame.deployed().then((instance) => {
-              buttonClickGameInstance = instance;
-              return instance;
-            }).then((result) => {
-              return buttonClickGameInstance.clickButton({from: account, value: 500000000000000});
-            })
-            .then((result) => {
-              console.log('The user was able to successfully click the button');
-              return this.setState({ isButtonClickOccuring: true });
-            })
-            .catch(e => {
-              console.log('Failed to send this Tx. ' + e);
-            });
-          }
+    return Promise.all(promises)
+      .then((clickMetadataArray) => {
+        // Assemble each into an erc721click object
+        const lastErc721Clicks = [];
+        clickMetadataArray.forEach((clickMetadata) => {
+          const lastErc721Click = {
+            blocksAwayFromDesiredBlock: clickMetadata[0].c[0],
+            clickTime: clickMetadata[1].c[0],
+            clickGeneration: clickMetadata[2].c[0],
+            owner: clickMetadata[3],
+          };
+          lastErc721Clicks.push(lastErc721Click);
         });
-      }
-    } else {
-      console.log('The user already has pressed the button this generation. Ignoring this click')
-    }
+        return lastErc721Clicks;
+      });
   }
 
   instantiateContract(web3) {
@@ -310,23 +302,38 @@ class App extends Component {
 
     // Monitor for block updates
     this.getLatestBlock();
-    this.intervalIds.push(setInterval(this.getLatestBlock.bind(this), smartContractRefreshInterval));
+    this.intervalIds.push(setInterval(
+      this.getLatestBlock.bind(this),
+      smartContractRefreshInterval,
+    ));
 
     // Monitor for the last button clicks
     this.getLastClicks();
-    this.intervalIds.push(setInterval(this.getLastClicks.bind(this), smartContractRefreshInterval));
+    this.intervalIds.push(setInterval(
+      this.getLastClicks.bind(this),
+      smartContractRefreshInterval,
+    ));
 
     // Monitor for game generation changes
     this.getGameGeneration();
-    this.intervalIds.push(setInterval(this.getGameGeneration.bind(this), smartContractRefreshInterval));
+    this.intervalIds.push(setInterval(
+      this.getGameGeneration.bind(this),
+      smartContractRefreshInterval,
+    ));
 
     // Monitor block number for victory changes
     this.getBlockNumberForVictory();
-    this.intervalIds.push(setInterval(this.getBlockNumberForVictory.bind(this), smartContractRefreshInterval));
+    this.intervalIds.push(setInterval(
+      this.getBlockNumberForVictory.bind(this),
+      smartContractRefreshInterval,
+    ));
 
     // Monitor token ownership for the current user
     this.getTokenOwnership();
-    this.intervalIds.push(setInterval(this.getTokenOwnership.bind(this), smartContractRefreshInterval));
+    this.intervalIds.push(setInterval(
+      this.getTokenOwnership.bind(this),
+      smartContractRefreshInterval,
+    ));
   }
 
   render() {
@@ -334,26 +341,37 @@ class App extends Component {
       <div className="app">
         <Header accounts={this.state.accounts} networkId={this.state.networkId} />
         <Tooltip hasWeb3={this.state.hasWeb3} accounts={this.state.accounts} />
-        
+
         <main className="container">
           <div className="item" >
             <Hero />
-            <TheButton onClick={this.onButtonClickedBinding}
-              currentBlockNumber={this.state.currentBlockNumber} 
-              victoryBlockNumber={this.state.victoryBlockNumer} 
-              requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory} 
+            <TheButton
+              onClick={this.onButtonClickedBinding}
+              currentBlockNumber={this.state.currentBlockNumber}
+              victoryBlockNumber={this.state.victoryBlockNumer}
+              requiredBlocksElapsedForVictory={this.state.requiredBlocksElapsedForVictory}
               showLoading={this.state.isButtonClickOccuring}
-              areButtonClicksAllowed={this.state.areButtonClicksAllowed} />
-            {this.state.myErc721Clicks && this.state.myErc721Clicks.length > 0 && <Clicks erc721Clicks={this.state.myErc721Clicks}/> }
-            {this.state.totalSupply > 0 && <Stats gameGeneration={this.state.gameGeneration} clicks={this.state.totalSupply} erc721Clicks={this.state.lastErc721Clicks} /> }
+              areButtonClicksAllowed={this.state.areButtonClicksAllowed}
+            />
+            {this.state.myErc721Clicks &&
+              this.state.myErc721Clicks.length > 0 &&
+              <Clicks erc721Clicks={this.state.myErc721Clicks} />
+            }
+            {this.state.totalSupply > 0 &&
+              <Stats
+                gameGeneration={this.state.gameGeneration}
+                clicks={this.state.totalSupply}
+                erc721Clicks={this.state.lastErc721Clicks}
+              />
+            }
             <Faq />
           </div>
         </main>
 
-        <Footer />        
+        <Footer />
       </div>
     );
   }
 }
 
-export default App
+export default App;

@@ -13,6 +13,7 @@ class Tooltip extends Component {
     this.state = {
       isVisible: true,
     };
+    this.hideTooltip = this.hideTooltip.bind(this);
   }
 
   getVisibility() {
@@ -54,7 +55,7 @@ class Tooltip extends Component {
       <div style={{ visibility: this.getVisibility() }} >
         {!this.hasMetaMask() && <MetaMaskHint />}
         {this.hasMetaMask() && !this.isAccountUnlocked() && <UnlockHint />}
-        <X onClick={this.hideTooltip.bind(this)} color="#ffffff" />
+        <X onClick={() => this.hideTooltip} color="#ffffff" />
       </div>
     );
   }
