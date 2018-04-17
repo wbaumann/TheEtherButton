@@ -9,13 +9,17 @@ class Stats extends Component {
     return (
       <div>
         <h1>Stats:</h1>
-        <p>Here's the current state of the game's smart contract:</p>
+        <p>Here&#39;s the current state of the game&#39;s smart contract:</p>
         <ul>
           <li>Game Generation: {this.props.gameGeneration}</li>
           <li>Total Clicks: {this.props.clicks}</li>
         </ul>
-        { this.props.erc721Clicks != null && <p>The last clicks were:</p> }
-        { this.props.erc721Clicks != null && <ClickFlairs erc721Clicks={this.props.erc721Clicks} /> }
+        { this.props.erc721Clicks != null &&
+          this.state.myErc721Clicks.length > 0 &&
+          <p>The last clicks were:</p> }
+        { this.props.erc721Clicks != null
+          && this.state.myErc721Clicks.length > 0
+          && <ClickFlairs erc721Clicks={this.props.erc721Clicks} /> }
       </div>
     );
   }
@@ -24,11 +28,13 @@ class Stats extends Component {
 Stats.propTypes = {
   gameGeneration: PropTypes.number,
   clicks: PropTypes.number,
+  erc721Clicks: PropTypes.arrayOf(PropTypes.shape),
 };
 
 Stats.defaultProps = {
   gameGeneration: -1,
   clicks: -1,
+  erc721Clicks: [],
 };
 
 export default Stats;

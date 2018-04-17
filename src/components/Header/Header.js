@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import AccountsList from './AccountsList/AccountsList';
+import PropTypes from 'prop-types';
 
-import '../../css/oswald.css';
-import '../../css/open-sans.css';
-import '../../css/pure-min.css';
+import AccountsList from './AccountsList/AccountsList';
 
 import './styles.css';
 
@@ -12,12 +10,17 @@ class Header extends Component {
     return (
       <div>
         <nav className="navbar">
-          <a href="#" className="pure-menu-heading">The Ether Button</a>
+          <a href="#top" className="pure-menu-heading">The Ether Button</a>
           <AccountsList accounts={this.props.accounts} networkId={this.props.networkId} />
         </nav>
       </div>
     );
   }
 }
+
+Header.propTypes = {
+  accounts: PropTypes.arrayOf(PropTypes.string).isRequired,
+  networkId: PropTypes.number.isRequired,
+};
 
 export default Header;

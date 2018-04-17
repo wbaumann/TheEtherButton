@@ -1,22 +1,29 @@
-import React, { Component } from 'react'
-import { User } from 'react-feather'
-import Account from './Account/Account'
-import Network from './Network/Network'
+import React, { Component } from 'react';
+import { User } from 'react-feather';
+import PropTypes from 'prop-types';
 
-import './styles.css'
+import Account from './Account/Account';
+import Network from './Network/Network';
+
+import './styles.css';
 
 class AccountsList extends Component {
-    render() {
-        return(
-            <div className="navbar-right account-wrapper">
-                <User color="#ffffff" className="account-icon"/>
-                <div className="account-details" >
-                    <Account accounts={this.props.accounts} />
-                    <Network networkId={this.props.networkId} />
-                </div>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="navbar-right account-wrapper">
+        <User color="#ffffff" className="account-icon" />
+        <div className="account-details" >
+          <Account accounts={this.props.accounts} />
+          <Network networkId={this.props.networkId} />
+        </div>
+      </div>
+    );
+  }
 }
 
-export default AccountsList
+AccountsList.propTypes = {
+  accounts: PropTypes.arrayOf(PropTypes.string).isRequired,
+  networkId: PropTypes.number.isRequired,
+};
+
+export default AccountsList;

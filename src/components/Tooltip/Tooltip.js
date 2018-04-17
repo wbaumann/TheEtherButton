@@ -29,7 +29,8 @@ class Tooltip extends Component {
     if (!this.state.isVisible) {
       return false;
     } else if (this.props.hasWeb3) {
-      // If we have a valid web3 browser, let's confirm that we have an active account (otherwise the user needs to unlock)
+      // If we have a valid web3 browser, let's confirm that we have an active account
+      // (otherwise the user needs to unlock)
       return this.props.accounts && this.props.accounts.length === 0;
     }
     return true;
@@ -41,7 +42,8 @@ class Tooltip extends Component {
 
   isAccountUnlocked() {
     if (this.hasMetaMask()) {
-      // If we have a valid web3 browser, let's confirm that we have an active account (otherwise the user needs to unlock)
+      // If we have a valid web3 browser, let's confirm that we have an active account
+      // (otherwise the user needs to unlock)
       return this.props.accounts && this.props.accounts.length > 0;
     }
     return false;

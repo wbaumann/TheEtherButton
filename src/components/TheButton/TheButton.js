@@ -30,7 +30,7 @@ class TheButton extends Component {
 
 TheButton.propTypes = {
   currentBlockNumber: PropTypes.number,
-  victoryBlockNumer: PropTypes.number,
+  victoryBlockNumber: PropTypes.number,
   requiredBlocksElapsedForVictory: PropTypes.number,
   showLoading: PropTypes.bool,
   areButtonClicksAllowed: PropTypes.bool,
