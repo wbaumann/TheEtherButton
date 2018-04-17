@@ -36,6 +36,10 @@ build/Release
 node_modules/
 jspm_packages/
 
+# But skip web3 dependencies that are not managed via npm
+!web3
+!web3-provider-engine
+
 # Typescript v1 declaration files
 typings/
 
