@@ -15,11 +15,11 @@ class Stats extends Component {
           <li>Total Clicks: {this.props.clicks}</li>
         </ul>
         { this.props.erc721Clicks != null &&
-          this.state.myErc721Clicks.length > 0 &&
+          this.props.erc721Clicks.length > 0 &&
           <p>The last clicks were:</p> }
-        { this.props.erc721Clicks != null
-          && this.state.myErc721Clicks.length > 0
-          && <ClickFlairs erc721Clicks={this.props.erc721Clicks} /> }
+        { this.props.erc721Clicks != null &&
+          this.props.erc721Clicks.length > 0 &&
+          <ClickFlairs erc721Clicks={this.props.erc721Clicks} /> }
       </div>
     );
   }
