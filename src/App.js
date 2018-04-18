@@ -230,9 +230,37 @@ class App extends Component {
         buttonClickGame.deployed().then((instance) => {
           buttonClickGameInstance = instance;
           return instance;
-        }).then(result => buttonClickGameInstance.gameGeneration.call(account)).then(result =>
+        }).then((result) => {
+          buttonClickGameInstance.gameGeneration.call(account);
+        }).then((result) => {
           // Update state with the result.
-          this.setState({ gameGeneration: result.c[0] }))
+          this.setState({ gameGeneration: result.c[0] });
+        })
+          .catch((e) => {
+            console.log(`Failed to fetch the current game generation. ${e}`);
+          });
+      }
+    });
+  }
+
+  getNumberOfClicksAtBlocksRemaining() {
+    const buttonClickGame = this.getButtonClickGame();
+    this.state.web3.eth.getAccounts((error, accounts) => {
+      if (!error && accounts && accounts.length > 0) {
+        const account = accounts[0];
+        buttonClickGame.deployed().then(instance => instance).then((instance) => {
+          const promises = [];
+          for (let blockCount = 0; blockCount <= 20; blockCount += 1) {
+            promises.push(instance.numberOfClicksAtBlocksRemaining.call(
+              blockCount,
+              { from: account },
+            ));
+          }
+          return Promise.all(promises);
+        }).then((resultArray) => {
+          // Update state with the result.
+          console.log(`Received results: ${resultArray}`);
+        })
           .catch((e) => {
             console.log(`Failed to fetch the current game generation. ${e}`);
           });
@@ -318,6 +346,13 @@ class App extends Component {
     this.getGameGeneration();
     this.intervalIds.push(setInterval(
       this.getGameGeneration.bind(this),
+      smartContractRefreshInterval,
+    ));
+
+    // Monitor for number of clicks at blocks remaining for changes
+    this.getNumberOfClicksAtBlocksRemaining();
+    this.intervalIds.push(setInterval(
+      this.getNumberOfClicksAtBlocksRemaining.bind(this),
       smartContractRefreshInterval,
     ));
 
