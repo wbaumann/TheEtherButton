@@ -22,8 +22,12 @@ class AccountsList extends Component {
 }
 
 AccountsList.propTypes = {
-  accounts: PropTypes.arrayOf(PropTypes.string).isRequired,
+  accounts: PropTypes.arrayOf(PropTypes.string),
   networkId: PropTypes.number.isRequired,
+};
+
+AccountsList.defaultProps = {
+  accounts: null,
 };
 
 export default AccountsList;

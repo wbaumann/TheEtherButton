@@ -119,7 +119,9 @@
       ],
       "indent": 2,
       "react/prefer-stateless-function": "off",
-      "jsx-a11y/img-has-alt": "off"
+      "jsx-a11y/img-has-alt": "off",
+      "arrow-body-style": "off",
+      "newline-per-chained-call": "off"
     }
   },
   "repository": {

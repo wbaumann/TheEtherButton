@@ -20,7 +20,11 @@ class Account extends Component {
 }
 
 Account.propTypes = {
-  accounts: PropTypes.arrayOf(PropTypes.string).isRequired,
+  accounts: PropTypes.arrayOf(PropTypes.string),
+};
+
+Account.defaultProps = {
+  accounts: null,
 };
 
 export default Account;

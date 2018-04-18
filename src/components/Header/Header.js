@@ -19,8 +19,12 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  accounts: PropTypes.arrayOf(PropTypes.string).isRequired,
+  accounts: PropTypes.arrayOf(PropTypes.string),
   networkId: PropTypes.number.isRequired,
+};
+
+Header.defaultProps = {
+  accounts: null,
 };
 
 export default Header;
