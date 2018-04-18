@@ -1,3 +1,5 @@
+/* eslint react/no-string-refs: 0 */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -34,21 +36,26 @@ class CircularCountdownTimer extends Component {
   }
 
   layoutComponents() {
-    this.background = this.background.getContext('2d');
+    this.background = this.refs.background.getContext('2d');
     this.background.scale(this.scale, this.scale);
-    this.countdownText = this.countdownText.getContext('2d');
+    this.countdownText = this.refs.countdownText.getContext('2d');
     this.countdownText.textAlign = 'center';
     this.countdownText.textBaseline = 'middle';
     this.countdownText.scale(this.scale, this.scale);
     if (this.props.onClick) {
-      this.component.addEventListener('click', this.props.onClick);
+      this.refs.component.addEventListener('click', this.props.onClick);
     }
   }
 
   drawComponents() {
     // First - clear our the existing rectangle
-    this.background.clearRect(0, 0, this.background.width, this.background.height);
-    this.countdownText.clearRect(0, 0, this.countdownText.width, this.countdownText.height);
+    this.background.clearRect(0, 0, this.refs.background.width, this.refs.background.height);
+    this.countdownText.clearRect(
+      0,
+      0,
+      this.refs.countdownText.width,
+      this.refs.countdownText.height,
+    );
 
     // Next - draw the background
     this.background.beginPath();
@@ -96,7 +103,11 @@ class CircularCountdownTimer extends Component {
   }
 
   render() {
-    const canvasStyle = { position: 'absolute', width: this.props.size, height: this.props.size };
+    const canvasStyle = {
+      position: 'absolute',
+      width: this.props.size,
+      height: this.props.size,
+    };
     const canvasProps = {
       style: canvasStyle,
       height: this.props.size * this.scale,
@@ -104,12 +115,9 @@ class CircularCountdownTimer extends Component {
     };
     return (
       <div className={this.props.areButtonClicksAllowed ? 'circular-countdown-timer' : 'circular-countdown-timer-disabled'} >
-        <div
-          ref={(ref) => { this.component = ref; }}
-          style={{ width: this.props.size, height: this.props.size }}
-        >
-          <canvas ref={(ref) => { this.background = ref; }} {...canvasProps} />
-          <canvas ref={(ref) => { this.countdownText = ref; }} {...canvasProps} />
+        <div ref="component" style={{ width: this.props.size, height: this.props.size }}>
+          <canvas ref="background" {...canvasProps} />
+          <canvas ref="countdownText" {...canvasProps} />
         </div>
       </div>
     );
@@ -123,7 +131,7 @@ CircularCountdownTimer.propTypes = {
   color: PropTypes.string,
   alpha: PropTypes.number,
   areButtonClicksAllowed: PropTypes.bool,
-  onClick: PropTypes.func,
+  onClick: PropTypes.func.isRequired,
 };
 
 CircularCountdownTimer.defaultProps = {
@@ -133,7 +141,7 @@ CircularCountdownTimer.defaultProps = {
   color: '#0000ff',
   areButtonClicksAllowed: true,
   alpha: 1,
-  onClick: null,
 };
 
 export default CircularCountdownTimer;
+
