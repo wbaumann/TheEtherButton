@@ -60,6 +60,11 @@ contract ButtonClickGame is ERC721Token("The Ether Button", "Butt"), ButtonClick
      */
     mapping (address => uint256) public addressLastClickedForGeneration;
 
+    /**
+     * A mapping from the number "remaining blocks" (eg 19 blocks left) to the number of clicks
+     * clicks that occurred at this "remaining blocks" total
+     */
+    mapping (uint8 => uint256) public numberOfClicksAtBlocksRemaining;
 
     /**
      * @dev This method contains the core game logic, tracking a distinct button "click" event and 
@@ -97,6 +102,9 @@ contract ButtonClickGame is ERC721Token("The Ether Button", "Butt"), ButtonClick
         if (_blocksAwayFromDesiredBlock == 0) {
             gameGeneration++;
         }
+
+        // Increment how many clicks have occurred at this number
+        numberOfClicksAtBlocksRemaining[uint8(_blocksAwayFromDesiredBlock)] += 1;
 
         // Update the blockNumber that is required for the next victory condition
         blockNumberForVictory = block.number + requiredBlocksElapsedForVictory;

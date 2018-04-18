@@ -65,7 +65,7 @@ truffle(develop)> ButtonClickGameContract.at(address).startGame()
 Button clicks can be initiated via the following command:
 
 ```bash
-truffle(develop)> ButtonClickGameContract.at(address).clickButton({value: 0500000000000000})
+truffle(develop)> ButtonClickGameContract.at(address).clickButton({value: 500000000000000})
 ```
 
 Finally if you are on a local test network, you can simulate mined blocks by running the following command:
