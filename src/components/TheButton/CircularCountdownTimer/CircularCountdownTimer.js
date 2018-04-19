@@ -1,5 +1,3 @@
-/* eslint react/no-string-refs: 0 */
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -36,25 +34,25 @@ class CircularCountdownTimer extends Component {
   }
 
   layoutComponents() {
-    this.background = this.refs.background.getContext('2d');
+    this.background = this.backgroundRef.getContext('2d');
     this.background.scale(this.scale, this.scale);
-    this.countdownText = this.refs.countdownText.getContext('2d');
+    this.countdownText = this.countdownTextRef.getContext('2d');
     this.countdownText.textAlign = 'center';
     this.countdownText.textBaseline = 'middle';
     this.countdownText.scale(this.scale, this.scale);
     if (this.props.onClick) {
-      this.refs.component.addEventListener('click', this.props.onClick);
+      this.componentRef.addEventListener('click', this.props.onClick);
     }
   }
 
   drawComponents() {
     // First - clear our the existing rectangle
-    this.background.clearRect(0, 0, this.refs.background.width, this.refs.background.height);
+    this.background.clearRect(0, 0, this.backgroundRef.width, this.backgroundRef.height);
     this.countdownText.clearRect(
       0,
       0,
-      this.refs.countdownText.width,
-      this.refs.countdownText.height,
+      this.countdownTextRef.width,
+      this.countdownTextRef.height,
     );
 
     // Next - draw the background
@@ -115,9 +113,12 @@ class CircularCountdownTimer extends Component {
     };
     return (
       <div className={this.props.areButtonClicksAllowed ? 'circular-countdown-timer' : 'circular-countdown-timer-disabled'} >
-        <div ref="component" style={{ width: this.props.size, height: this.props.size }}>
-          <canvas ref="background" {...canvasProps} />
-          <canvas ref="countdownText" {...canvasProps} />
+        <div
+          ref={(ref) => { this.componentRef = ref; }}
+          style={{ width: this.props.size, height: this.props.size }}
+        >
+          <canvas ref={(ref) => { this.backgroundRef = ref; }} {...canvasProps} />
+          <canvas ref={(ref) => { this.countdownTextRef = ref; }} {...canvasProps} />
         </div>
       </div>
     );
