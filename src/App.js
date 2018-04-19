@@ -298,6 +298,9 @@ class App extends Component {
         }).then((result) => {
           // Update state with the result.
           this.setState({ victoryBlockNumer: result.c[0] });
+
+          // And fetch the latest block number
+          this.getLatestBlock();
         }).catch((e) => {
           console.log(`Failed to fetch the block number for victory. ${e}`);
         });
@@ -321,7 +324,6 @@ class App extends Component {
     const smartContractRefreshInterval = 5000;
 
     // Monitor for block updates
-    this.getLatestBlock();
     this.intervalIds.push(setInterval(
       this.getLatestBlock.bind(this),
       smartContractRefreshInterval,
