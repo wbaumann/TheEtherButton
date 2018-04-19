@@ -323,12 +323,6 @@ class App extends Component {
     // Define how frequently we check out Smart Contract
     const smartContractRefreshInterval = 5000;
 
-    // Monitor for block updates
-    this.intervalIds.push(setInterval(
-      this.getLatestBlock.bind(this),
-      smartContractRefreshInterval,
-    ));
-
     // Monitor for the last button clicks
     this.getLastClicks();
     this.intervalIds.push(setInterval(
