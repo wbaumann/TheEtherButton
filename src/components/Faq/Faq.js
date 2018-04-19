@@ -1,6 +1,8 @@
 /* eslint max-len: 0 */
 
 import React, { Component } from 'react';
+import LazyLoad from 'react-lazyload';
+
 import FaqItem from './FaqItem/FaqItem';
 
 import './styles.css';
@@ -21,7 +23,11 @@ class Faq extends Component {
             <li>Ether, a &#34;cryptocurrency&#34; that powers the <a target="_blank" rel="noopener noreferrer" href="https://www.ethereum.org/">Ethereum</a> blockchain, which runs this game.</li>
           </ul>
           <p>The video below will guide you through how install MetaMask:</p>
-          <p className="iframe-center"><iframe title="metamask" width="560" height="315" src="https://www.youtube-nocookie.com/embed/tfETpi-9ORs" frameBorder="0" allowFullScreen /></p>
+          <p className="iframe-center">
+            <LazyLoad height={315} once >
+              <iframe title="metamask" width="560" height="315" src="https://www.youtube-nocookie.com/embed/tfETpi-9ORs" frameBorder="0" allowFullScreen />
+            </LazyLoad>
+          </p>
         </FaqItem>
         <FaqItem title="What are the rules?">
           <p>All game rules have been codified in an Ethereum <a target="_blank" rel="noopener noreferrer" href="https://www.coindesk.com/information/ethereum-smart-contracts-work/">Smart Contract</a>:</p>

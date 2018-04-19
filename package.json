@@ -58,6 +58,7 @@
     "react-chartist": "^0.13.1",
     "react-dom": "^15.4.2",
     "react-feather": "^1.0.8",
+    "react-lazyload": "^2.3.0",
     "zeppelin-solidity": "1.8.0"
   },
   "scripts": {
