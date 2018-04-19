@@ -9,7 +9,11 @@ import './styles.css';
 
 class TheButton extends Component {
   getRemainingBlockCount() {
-    return Math.max(this.props.victoryBlockNumber - this.props.currentBlockNumber, 0);
+    const remaining = Math.max(this.props.victoryBlockNumber - this.props.currentBlockNumber, 0);
+    if (remaining > this.props.requiredBlocksElapsedForVictory) {
+      return this.props.requiredBlocksElapsedForVictory;
+    }
+    return remaining;
   }
 
   render() {
