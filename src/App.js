@@ -59,6 +59,7 @@ class App extends Component {
       myErc721Clicks: [],
       isButtonClickOccuring: false,
       areButtonClicksAllowed: true,
+      numberOfClicksAtBlocksRemaining: [],
     };
 
     this.intervalIds = [];
@@ -278,9 +279,14 @@ class App extends Component {
             ));
           }
           return Promise.all(promises);
-        }).then((resultArray) => {
-          // Update state with the result.
-          console.log(`Received results: ${resultArray}`);
+        }).then((bigNumberResultArray) => {
+          const results = [];
+          bigNumberResultArray.forEach((bigNumber) => {
+            results.push(bigNumber.c[0]);
+          });
+          return results;
+        }).then((results) => {
+          this.setState({ numberOfClicksAtBlocksRemaining: results });
         }).catch((e) => {
           console.log(`Failed to fetch the number of blocks remaining. ${e}`);
         });
@@ -385,6 +391,7 @@ class App extends Component {
                 gameGeneration={this.state.gameGeneration}
                 clicks={this.state.totalSupply}
                 erc721Clicks={this.state.lastErc721Clicks}
+                numberOfClicksAtBlocksRemaining={this.state.numberOfClicksAtBlocksRemaining}
               />
             }
             <Faq />

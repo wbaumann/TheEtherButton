@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ClickFlairs from '../ClickFlairs/ClickFlairs';
+import ClicksChart from './ClicksChart/ClicksChart';
 
 import './styles.css';
 
@@ -20,6 +21,12 @@ class Stats extends Component {
         { this.props.erc721Clicks != null &&
           this.props.erc721Clicks.length > 0 &&
           <ClickFlairs erc721Clicks={this.props.erc721Clicks} /> }
+        { this.props.numberOfClicksAtBlocksRemaining != null &&
+          this.props.numberOfClicksAtBlocksRemaining.length > 0 &&
+          <ClicksChart
+            numberOfClicksAtBlocksRemaining={this.props.numberOfClicksAtBlocksRemaining}
+          />
+        }
       </div>
     );
   }
@@ -29,6 +36,7 @@ Stats.propTypes = {
   gameGeneration: PropTypes.number,
   clicks: PropTypes.number,
   erc721Clicks: PropTypes.arrayOf(PropTypes.shape),
+  numberOfClicksAtBlocksRemaining: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 Stats.defaultProps = {
