@@ -8,14 +8,16 @@ class ClicksChart extends Component {
   render() {
     const labels = [];
     const innerSeries = [];
-    for (let index = 0; index < this.props.numberOfClicksAtBlocksRemaining.length; index += 1) {
+    const series = [];
+
+    // eslint-disable-next-line
+    for (let index = this.props.numberOfClicksAtBlocksRemaining.length - 1; index >= 0; index -= 1) {
       labels.push(`${index}`);
       innerSeries.push(this.props.numberOfClicksAtBlocksRemaining[index]);
     }
-    const series = [];
-    series.push(innerSeries);
 
-    const data = { labels, series };
+    series.push(innerSeries);
+    const data = { series, labels };
 
     const options = {
       axisY: {
