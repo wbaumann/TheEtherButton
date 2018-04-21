@@ -108,10 +108,10 @@ class App extends Component {
             }).then((result) => {
               console.log('The user was able to successfully click the button');
               return this.setState({ isButtonClickOccuring: true });
-            })
-              .catch((e) => {
-                console.log(`Failed to send this Tx. ${e}`);
-              });
+            }).catch((e) => {
+              this.setState({ isButtonClickOccuring: false });
+              console.log(`Failed to send this Tx. ${e}`);
+            });
           }
         });
       }
