@@ -1,0 +1,1626 @@
+{
+  "contractName": "ButtonClickGameControls",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "addr",
+          "type": "address"
+        },
+        {
+          "name": "roleName",
+          "type": "string"
+        }
+      ],
+      "name": "checkRole",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "minimumFee",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "started",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "addr",
+          "type": "address"
+        },
+        {
+          "name": "roleName",
+          "type": "string"
+        }
+      ],
+      "name": "hasRole",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "requiredBlocksElapsedForVictory",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "addr",
+          "type": "address"
+        },
+        {
+          "name": "roleName",
+          "type": "string"
+        }
+      ],
+      "name": "adminRemoveRole",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "addr",
+          "type": "address"
+        },
+        {
+          "name": "roleName",
+          "type": "string"
+        }
+      ],
+      "name": "adminAddRole",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "ROLE_ADMIN",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "addr",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "roleName",
+          "type": "string"
+        }
+      ],
+      "name": "RoleAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "addr",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "roleName",
+          "type": "string"
+        }
+      ],
+      "name": "RoleRemoved",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_requiredBlocksElapsedForVictory",
+          "type": "uint256"
+        }
+      ],
+      "name": "setRequiredBlocksElapsedForVictory",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_minimumFee",
+          "type": "uint256"
+        }
+      ],
+      "name": "setMinimumFee",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "withdrawBalance",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x60606040526000600160006101000a81548160ff021916908315150217905550610071336040805190810160405280600581526020017f61646d696e0000000000000000000000000000000000000000000000000000008152506100766401000000000261090b176401000000009004565b610232565b610100826000836040518082805190602001908083835b6020831015156100b2578051825260208201915060208101905060208303925061008d565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405180910390206101d464010000000002610aba179091906401000000009004565b7fbfec83d64eaa953f2708271a023ab9ee82057f8f3578d548c1a4ba0b5b7004898282604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200180602001828103825283818151815260200191508051906020019080838360005b8381101561019557808201518184015260208101905061017a565b50505050905090810190601f1680156101c25780820380516001836020036101000a031916815260200191505b50935050505060405180910390a15050565b60018260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055505050565b610b44806102416000396000f3006060604052600436106100af576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630988ca8c146100b4578063182a7506146101305780631a7626e7146101535780631f2698ab1461017c578063217fe6c6146101a957806324fa6f3b1461023d5780633ccb25a2146102665780635fd8c7101461028957806388cee87e1461029e578063b25fa92c1461031a578063d391014b14610396575b600080fd5b34156100bf57600080fd5b61012e600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091905050610424565b005b341561013b57600080fd5b61015160048080359060200190919050506104a5565b005b341561015e57600080fd5b6101666104ee565b6040518082815260200191505060405180910390f35b341561018757600080fd5b61018f6104f4565b604051808215151515815260200191505060405180910390f35b34156101b457600080fd5b610223600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091905050610507565b604051808215151515815260200191505060405180910390f35b341561024857600080fd5b61025061058e565b6040518082815260200191505060405180910390f35b341561027157600080fd5b6102876004808035906020019091905050610594565b005b341561029457600080fd5b61029c6105dd565b005b34156102a957600080fd5b610318600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091905050610675565b005b341561032557600080fd5b610394600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919050506106c2565b005b34156103a157600080fd5b6103a961070f565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156103e95780820151818401526020810190506103ce565b50505050905090810190601f1680156104165780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6104a1826000836040518082805190602001908083835b602083101515610460578051825260208201915060208101905060208303925061043b565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902061074890919063ffffffff16565b5050565b6104e4336040805190810160405280600781526020017f66696e616e636500000000000000000000000000000000000000000000000000815250610424565b8060028190555050565b60025481565b600160009054906101000a900460ff1681565b6000610586836000846040518082805190602001908083835b6020831015156105455780518252602082019150602081019050602083039250610520565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902061076190919063ffffffff16565b905092915050565b60035481565b6105d3336040805190810160405280600581526020017f61646d696e000000000000000000000000000000000000000000000000000000815250610424565b8060038190555050565b61061c336040805190810160405280600781526020017f66696e616e636500000000000000000000000000000000000000000000000000815250610424565b3373ffffffffffffffffffffffffffffffffffffffff166108fc3073ffffffffffffffffffffffffffffffffffffffff16319081150290604051600060405180830381858888f19350505050151561067357600080fd5b565b6106b4336040805190810160405280600581526020017f61646d696e000000000000000000000000000000000000000000000000000000815250610424565b6106be82826107ba565b5050565b610701336040805190810160405280600581526020017f61646d696e000000000000000000000000000000000000000000000000000000815250610424565b61070b828261090b565b5050565b6040805190810160405280600581526020017f61646d696e00000000000000000000000000000000000000000000000000000081525081565b6107528282610761565b151561075d57600080fd5b5050565b60008260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff16905092915050565b610837826000836040518082805190602001908083835b6020831015156107f657805182526020820191506020810190506020830392506107d1565b6001836020036101000a0380198251168184511680821785525050505050509050019150509081526020016040518091039020610a5c90919063ffffffff16565b7fd211483f91fc6eff862467f8de606587a30c8fc9981056f051b897a418df803a8282604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200180602001828103825283818151815260200191508051906020019080838360005b838110156108cc5780820151818401526020810190506108b1565b50505050905090810190601f1680156108f95780820380516001836020036101000a031916815260200191505b50935050505060405180910390a15050565b610988826000836040518082805190602001908083835b6020831015156109475780518252602082019150602081019050602083039250610922565b6001836020036101000a0380198251168184511680821785525050505050509050019150509081526020016040518091039020610aba90919063ffffffff16565b7fbfec83d64eaa953f2708271a023ab9ee82057f8f3578d548c1a4ba0b5b7004898282604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200180602001828103825283818151815260200191508051906020019080838360005b83811015610a1d578082015181840152602081019050610a02565b50505050905090810190601f168015610a4a5780820380516001836020036101000a031916815260200191505b50935050505060405180910390a15050565b60008260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055505050565b60018260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff02191690831515021790555050505600a165627a7a723058206857bfddcf4f14b5ea1c1afa25d16ddbb65d6cffcada345d85c94a3b6a3a5afe0029",
+  "deployedBytecode": "0x6060604052600436106100af576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680630988ca8c146100b4578063182a7506146101305780631a7626e7146101535780631f2698ab1461017c578063217fe6c6146101a957806324fa6f3b1461023d5780633ccb25a2146102665780635fd8c7101461028957806388cee87e1461029e578063b25fa92c1461031a578063d391014b14610396575b600080fd5b34156100bf57600080fd5b61012e600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091905050610424565b005b341561013b57600080fd5b61015160048080359060200190919050506104a5565b005b341561015e57600080fd5b6101666104ee565b6040518082815260200191505060405180910390f35b341561018757600080fd5b61018f6104f4565b604051808215151515815260200191505060405180910390f35b34156101b457600080fd5b610223600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091905050610507565b604051808215151515815260200191505060405180910390f35b341561024857600080fd5b61025061058e565b6040518082815260200191505060405180910390f35b341561027157600080fd5b6102876004808035906020019091905050610594565b005b341561029457600080fd5b61029c6105dd565b005b34156102a957600080fd5b610318600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091905050610675565b005b341561032557600080fd5b610394600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919050506106c2565b005b34156103a157600080fd5b6103a961070f565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156103e95780820151818401526020810190506103ce565b50505050905090810190601f1680156104165780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6104a1826000836040518082805190602001908083835b602083101515610460578051825260208201915060208101905060208303925061043b565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902061074890919063ffffffff16565b5050565b6104e4336040805190810160405280600781526020017f66696e616e636500000000000000000000000000000000000000000000000000815250610424565b8060028190555050565b60025481565b600160009054906101000a900460ff1681565b6000610586836000846040518082805190602001908083835b6020831015156105455780518252602082019150602081019050602083039250610520565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902061076190919063ffffffff16565b905092915050565b60035481565b6105d3336040805190810160405280600581526020017f61646d696e000000000000000000000000000000000000000000000000000000815250610424565b8060038190555050565b61061c336040805190810160405280600781526020017f66696e616e636500000000000000000000000000000000000000000000000000815250610424565b3373ffffffffffffffffffffffffffffffffffffffff166108fc3073ffffffffffffffffffffffffffffffffffffffff16319081150290604051600060405180830381858888f19350505050151561067357600080fd5b565b6106b4336040805190810160405280600581526020017f61646d696e000000000000000000000000000000000000000000000000000000815250610424565b6106be82826107ba565b5050565b610701336040805190810160405280600581526020017f61646d696e000000000000000000000000000000000000000000000000000000815250610424565b61070b828261090b565b5050565b6040805190810160405280600581526020017f61646d696e00000000000000000000000000000000000000000000000000000081525081565b6107528282610761565b151561075d57600080fd5b5050565b60008260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060009054906101000a900460ff16905092915050565b610837826000836040518082805190602001908083835b6020831015156107f657805182526020820191506020810190506020830392506107d1565b6001836020036101000a0380198251168184511680821785525050505050509050019150509081526020016040518091039020610a5c90919063ffffffff16565b7fd211483f91fc6eff862467f8de606587a30c8fc9981056f051b897a418df803a8282604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200180602001828103825283818151815260200191508051906020019080838360005b838110156108cc5780820151818401526020810190506108b1565b50505050905090810190601f1680156108f95780820380516001836020036101000a031916815260200191505b50935050505060405180910390a15050565b610988826000836040518082805190602001908083835b6020831015156109475780518252602082019150602081019050602083039250610922565b6001836020036101000a0380198251168184511680821785525050505050509050019150509081526020016040518091039020610aba90919063ffffffff16565b7fbfec83d64eaa953f2708271a023ab9ee82057f8f3578d548c1a4ba0b5b7004898282604051808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200180602001828103825283818151815260200191508051906020019080838360005b83811015610a1d578082015181840152602081019050610a02565b50505050905090810190601f168015610a4a5780820380516001836020036101000a031916815260200191505b50935050505060405180910390a15050565b60008260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff0219169083151502179055505050565b60018260000160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060006101000a81548160ff02191690831515021790555050505600a165627a7a723058206857bfddcf4f14b5ea1c1afa25d16ddbb65d6cffcada345d85c94a3b6a3a5afe0029",
+  "sourceMap": "126:1647:2:-;;;268:5;246:27;;;;;;;;;;;;;;;;;;;;1016:31:7;1024:10;1036;;;;;;;;;;;;;;;;;;1016:7;;;;;:31;;;:::i;:::-;126:1647:2;;2169:130:7;2238:25;2258:4;2238:5;2244:8;2238:15;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;2238:15:7;;;;;;;;;;;;;;;;;;;;;:19;;;;;;:25;;;;;:::i;:::-;2269;2279:4;2285:8;2269:25;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;2269:25:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2169:130;;:::o;326:96:8:-;413:4;393;:11;;:17;405:4;393:17;;;;;;;;;;;;;;;;:24;;;;;;;;;;;;;;;;;;326:96;;:::o;126:1647:2:-;;;;;;;",
+  "deployedSourceMap": "126:1647:2:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1196:110:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1440:106:2;;;;;;;;;;;;;;;;;;;;;;;;;;578:25;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;246:27;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1444:132:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;793:46:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1143:188;;;;;;;;;;;;;;;;;;;;;;;;;;1659:107;;;;;;;;;;;;;;1931:120:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1694:114;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;862:43;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;862:43:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1196:110;1274:27;1296:4;1274:5;1280:8;1274:15;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;1274:15:7;;;;;;;;;;;;;;;;;;;;;:21;;:27;;;;:::i;:::-;1196:110;;:::o;1440:106:2:-;385:35:3;395:10;407:12;;;;;;;;;;;;;;;;;;385:9;:35::i;:::-;1528:11:2;1515:10;:24;;;;1440:106;:::o;578:25::-;;;;:::o;246:27::-;;;;;;;;;;;;;:::o;1444:132:7:-;1525:4;1546:25;1566:4;1546:5;1552:8;1546:15;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;1546:15:7;;;;;;;;;;;;;;;;;;;;;:19;;:25;;;;:::i;:::-;1539:32;;1444:132;;;;:::o;793:46:2:-;;;;:::o;1143:188::-;2904:33:7;2914:10;2926;;;;;;;;;;;;;;;;;;2904:9;:33::i;:::-;1292:32:2;1258:31;:66;;;;1143:188;:::o;1659:107::-;385:35:3;395:10;407:12;;;;;;;;;;;;;;;;;;385:9;:35::i;:::-;1717:10:2;:19;;:42;1745:4;1737:21;;;1717:42;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1659:107::o;1931:120:7:-;2904:33;2914:10;2926;;;;;;;;;;;;;;;;;;2904:9;:33::i;:::-;2020:26;2031:4;2037:8;2020:10;:26::i;:::-;1931:120;;:::o;1694:114::-;2904:33;2914:10;2926;;;;;;;;;;;;;;;;;;2904:9;:33::i;:::-;1780:23;1788:4;1794:8;1780:7;:23::i;:::-;1694:114;;:::o;862:43::-;;;;;;;;;;;;;;;;;;;;:::o;663:107:8:-;749:15;753:4;759;749:3;:15::i;:::-;741:24;;;;;;;;663:107;;:::o;848:124::-;929:4;950;:11;;:17;962:4;950:17;;;;;;;;;;;;;;;;;;;;;;;;;943:24;;848:124;;;;:::o;2422:138:7:-;2494:28;2517:4;2494:5;2500:8;2494:15;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;2494:15:7;;;;;;;;;;;;;;;;;;;;;:22;;:28;;;;:::i;:::-;2528:27;2540:4;2546:8;2528:27;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;2528:27:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2422:138;;:::o;2169:130::-;2238:25;2258:4;2238:5;2244:8;2238:15;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;2238:15:7;;;;;;;;;;;;;;;;;;;;;:19;;:25;;;;:::i;:::-;2269;2279:4;2285:8;2269:25;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;2269:25:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2169:130;;:::o;487:100:8:-;577:5;557:4;:11;;:17;569:4;557:17;;;;;;;;;;;;;;;;:25;;;;;;;;;;;;;;;;;;487:100;;:::o;326:96::-;413:4;393;:11;;:17;405:4;393:17;;;;;;;;;;;;;;;;:24;;;;;;;;;;;;;;;;;;326:96;;:::o",
+  "source": "pragma solidity ^0.4.21;\n\nimport \"./ButtonClickRBAC.sol\";\n\n/*\n * @title Defines specific controls for game administrators\n */\ncontract ButtonClickGameControls is ButtonClickRBAC {\n\n    /**\n     * Monitors if the game has been started\n     */\n    bool public started = false;\n\n    /**\n     * In order to reduce the likelihood of someone spamming the button click continually with\n     * multiple ether addresses, which would effectively prevent the button from ever decrementing, \n     * we have introduced the concept of a minimum fee required to click the button. \n     */\n    uint256 public minimumFee;\n\n    /**\n     * Defines how many blocks must elapse before the game can be \"won\"\n     *\n     * http://solidity.readthedocs.io/en/develop/contracts.html?#visibility-and-getters\n     */\n    uint256 public requiredBlocksElapsedForVictory;\n\n    /**\n     * @dev Access modifier, which restricts a call to happen once the game is started\n     */\n    modifier isStarted() {\n        require(started);\n        _;\n    }\n\n    /**\n     * @dev Changes the required number of blocks for victory. This may ONLY be called by the \"admin\" role\n     */\n    function setRequiredBlocksElapsedForVictory(uint256 _requiredBlocksElapsedForVictory) external onlyAdmin {\n        requiredBlocksElapsedForVictory = _requiredBlocksElapsedForVictory;\n    }\n    \n    /**\n     * @dev Changes the minimum fee. This may ONLY be called by the \"finance\" role\n     */\n    function setMinimumFee(uint256 _minimumFee) external onlyFinance {\n        minimumFee = _minimumFee;\n    }\n\n    /**\n     * @dev Withdraws the available balance. This may ONLY be called by the \"finance\" role\n     */\n    function withdrawBalance() external onlyFinance {\n        msg.sender.transfer(address(this).balance);\n    }\n    \n}",
+  "sourcePath": "/Users/williambaumann/workspace/Ethereum/theetherbutton/contracts/ButtonClickGameControls.sol",
+  "ast": {
+    "absolutePath": "/Users/williambaumann/workspace/Ethereum/theetherbutton/contracts/ButtonClickGameControls.sol",
+    "exportedSymbols": {
+      "ButtonClickGameControls": [
+        327
+      ]
+    },
+    "id": 328,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 267,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".21"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "absolutePath": "/Users/williambaumann/workspace/Ethereum/theetherbutton/contracts/ButtonClickRBAC.sol",
+        "file": "./ButtonClickRBAC.sol",
+        "id": 268,
+        "nodeType": "ImportDirective",
+        "scope": 328,
+        "sourceUnit": 347,
+        "src": "26:31:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": [],
+            "baseName": {
+              "contractScope": null,
+              "id": 269,
+              "name": "ButtonClickRBAC",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 346,
+              "src": "162:15:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ButtonClickRBAC_$346",
+                "typeString": "contract ButtonClickRBAC"
+              }
+            },
+            "id": 270,
+            "nodeType": "InheritanceSpecifier",
+            "src": "162:15:2"
+          }
+        ],
+        "contractDependencies": [
+          346,
+          694
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 327,
+        "linearizedBaseContracts": [
+          327,
+          346,
+          694
+        ],
+        "name": "ButtonClickGameControls",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 273,
+            "name": "started",
+            "nodeType": "VariableDeclaration",
+            "scope": 327,
+            "src": "246:27:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 271,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "246:4:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "66616c7365",
+              "id": 272,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "268:5:2",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "false"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 275,
+            "name": "minimumFee",
+            "nodeType": "VariableDeclaration",
+            "scope": 327,
+            "src": "578:25:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 274,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "578:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 277,
+            "name": "requiredBlocksElapsedForVictory",
+            "nodeType": "VariableDeclaration",
+            "scope": 327,
+            "src": "793:46:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 276,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "793:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 284,
+              "nodeType": "Block",
+              "src": "970:44:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 280,
+                        "name": "started",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 273,
+                        "src": "988:7:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 279,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1938,
+                      "src": "980:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 281,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "980:16:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 282,
+                  "nodeType": "ExpressionStatement",
+                  "src": "980:16:2"
+                },
+                {
+                  "id": 283,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "1006:1:2"
+                }
+              ]
+            },
+            "documentation": "@dev Access modifier, which restricts a call to happen once the game is started",
+            "id": 285,
+            "name": "isStarted",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 278,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "967:2:2"
+            },
+            "src": "949:65:2",
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 296,
+              "nodeType": "Block",
+              "src": "1248:83:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 294,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 292,
+                      "name": "requiredBlocksElapsedForVictory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 277,
+                      "src": "1258:31:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 293,
+                      "name": "_requiredBlocksElapsedForVictory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 287,
+                      "src": "1292:32:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1258:66:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 295,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1258:66:2"
+                }
+              ]
+            },
+            "documentation": "@dev Changes the required number of blocks for victory. This may ONLY be called by the \"admin\" role",
+            "id": 297,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [],
+                "id": 290,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 289,
+                  "name": "onlyAdmin",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 693,
+                  "src": "1238:9:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1238:9:2"
+              }
+            ],
+            "name": "setRequiredBlocksElapsedForVictory",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 288,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 287,
+                  "name": "_requiredBlocksElapsedForVictory",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 297,
+                  "src": "1187:40:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 286,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1187:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1186:42:2"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 291,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1248:0:2"
+            },
+            "scope": 327,
+            "src": "1143:188:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 308,
+              "nodeType": "Block",
+              "src": "1505:41:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 306,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 304,
+                      "name": "minimumFee",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 275,
+                      "src": "1515:10:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 305,
+                      "name": "_minimumFee",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 299,
+                      "src": "1528:11:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1515:24:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 307,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1515:24:2"
+                }
+              ]
+            },
+            "documentation": "@dev Changes the minimum fee. This may ONLY be called by the \"finance\" role",
+            "id": 309,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [],
+                "id": 302,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 301,
+                  "name": "onlyFinance",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 345,
+                  "src": "1493:11:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1493:11:2"
+              }
+            ],
+            "name": "setMinimumFee",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 300,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 299,
+                  "name": "_minimumFee",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 309,
+                  "src": "1463:19:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 298,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1463:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1462:21:2"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 303,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1505:0:2"
+            },
+            "scope": 327,
+            "src": "1440:106:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 325,
+              "nodeType": "Block",
+              "src": "1707:59:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 320,
+                              "name": "this",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 1974,
+                              "src": "1745:4:2",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_ButtonClickGameControls_$327",
+                                "typeString": "contract ButtonClickGameControls"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_contract$_ButtonClickGameControls_$327",
+                                "typeString": "contract ButtonClickGameControls"
+                              }
+                            ],
+                            "id": 319,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "1737:7:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": "address"
+                          },
+                          "id": 321,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1737:13:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "id": 322,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "balance",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1737:21:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 314,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1935,
+                          "src": "1717:3:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 317,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1717:10:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "id": 318,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "transfer",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1717:19:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_transfer_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 323,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1717:42:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 324,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1717:42:2"
+                }
+              ]
+            },
+            "documentation": "@dev Withdraws the available balance. This may ONLY be called by the \"finance\" role",
+            "id": 326,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [],
+                "id": 312,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 311,
+                  "name": "onlyFinance",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 345,
+                  "src": "1695:11:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1695:11:2"
+              }
+            ],
+            "name": "withdrawBalance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 310,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1683:2:2"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 313,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1707:0:2"
+            },
+            "scope": 327,
+            "src": "1659:107:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 328,
+        "src": "126:1647:2"
+      }
+    ],
+    "src": "0:1773:2"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/williambaumann/workspace/Ethereum/theetherbutton/contracts/ButtonClickGameControls.sol",
+    "exportedSymbols": {
+      "ButtonClickGameControls": [
+        327
+      ]
+    },
+    "id": 328,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 267,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".21"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:2"
+      },
+      {
+        "absolutePath": "/Users/williambaumann/workspace/Ethereum/theetherbutton/contracts/ButtonClickRBAC.sol",
+        "file": "./ButtonClickRBAC.sol",
+        "id": 268,
+        "nodeType": "ImportDirective",
+        "scope": 328,
+        "sourceUnit": 347,
+        "src": "26:31:2",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": [],
+            "baseName": {
+              "contractScope": null,
+              "id": 269,
+              "name": "ButtonClickRBAC",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 346,
+              "src": "162:15:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ButtonClickRBAC_$346",
+                "typeString": "contract ButtonClickRBAC"
+              }
+            },
+            "id": 270,
+            "nodeType": "InheritanceSpecifier",
+            "src": "162:15:2"
+          }
+        ],
+        "contractDependencies": [
+          346,
+          694
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 327,
+        "linearizedBaseContracts": [
+          327,
+          346,
+          694
+        ],
+        "name": "ButtonClickGameControls",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 273,
+            "name": "started",
+            "nodeType": "VariableDeclaration",
+            "scope": 327,
+            "src": "246:27:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bool",
+              "typeString": "bool"
+            },
+            "typeName": {
+              "id": 271,
+              "name": "bool",
+              "nodeType": "ElementaryTypeName",
+              "src": "246:4:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "66616c7365",
+              "id": 272,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "bool",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "268:5:2",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_bool",
+                "typeString": "bool"
+              },
+              "value": "false"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 275,
+            "name": "minimumFee",
+            "nodeType": "VariableDeclaration",
+            "scope": 327,
+            "src": "578:25:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 274,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "578:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 277,
+            "name": "requiredBlocksElapsedForVictory",
+            "nodeType": "VariableDeclaration",
+            "scope": 327,
+            "src": "793:46:2",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 276,
+              "name": "uint256",
+              "nodeType": "ElementaryTypeName",
+              "src": "793:7:2",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 284,
+              "nodeType": "Block",
+              "src": "970:44:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 280,
+                        "name": "started",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 273,
+                        "src": "988:7:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 279,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1938,
+                      "src": "980:7:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 281,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "980:16:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 282,
+                  "nodeType": "ExpressionStatement",
+                  "src": "980:16:2"
+                },
+                {
+                  "id": 283,
+                  "nodeType": "PlaceholderStatement",
+                  "src": "1006:1:2"
+                }
+              ]
+            },
+            "documentation": "@dev Access modifier, which restricts a call to happen once the game is started",
+            "id": 285,
+            "name": "isStarted",
+            "nodeType": "ModifierDefinition",
+            "parameters": {
+              "id": 278,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "967:2:2"
+            },
+            "src": "949:65:2",
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 296,
+              "nodeType": "Block",
+              "src": "1248:83:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 294,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 292,
+                      "name": "requiredBlocksElapsedForVictory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 277,
+                      "src": "1258:31:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 293,
+                      "name": "_requiredBlocksElapsedForVictory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 287,
+                      "src": "1292:32:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1258:66:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 295,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1258:66:2"
+                }
+              ]
+            },
+            "documentation": "@dev Changes the required number of blocks for victory. This may ONLY be called by the \"admin\" role",
+            "id": 297,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [],
+                "id": 290,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 289,
+                  "name": "onlyAdmin",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 693,
+                  "src": "1238:9:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1238:9:2"
+              }
+            ],
+            "name": "setRequiredBlocksElapsedForVictory",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 288,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 287,
+                  "name": "_requiredBlocksElapsedForVictory",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 297,
+                  "src": "1187:40:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 286,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1187:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1186:42:2"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 291,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1248:0:2"
+            },
+            "scope": 327,
+            "src": "1143:188:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 308,
+              "nodeType": "Block",
+              "src": "1505:41:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 306,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 304,
+                      "name": "minimumFee",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 275,
+                      "src": "1515:10:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 305,
+                      "name": "_minimumFee",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 299,
+                      "src": "1528:11:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "src": "1515:24:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 307,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1515:24:2"
+                }
+              ]
+            },
+            "documentation": "@dev Changes the minimum fee. This may ONLY be called by the \"finance\" role",
+            "id": 309,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [],
+                "id": 302,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 301,
+                  "name": "onlyFinance",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 345,
+                  "src": "1493:11:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1493:11:2"
+              }
+            ],
+            "name": "setMinimumFee",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 300,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 299,
+                  "name": "_minimumFee",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 309,
+                  "src": "1463:19:2",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 298,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1463:7:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1462:21:2"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 303,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1505:0:2"
+            },
+            "scope": 327,
+            "src": "1440:106:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 325,
+              "nodeType": "Block",
+              "src": "1707:59:2",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "id": 320,
+                              "name": "this",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 1974,
+                              "src": "1745:4:2",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_ButtonClickGameControls_$327",
+                                "typeString": "contract ButtonClickGameControls"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_contract$_ButtonClickGameControls_$327",
+                                "typeString": "contract ButtonClickGameControls"
+                              }
+                            ],
+                            "id": 319,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "1737:7:2",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": "address"
+                          },
+                          "id": 321,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "1737:13:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        },
+                        "id": 322,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "balance",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1737:21:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 314,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1935,
+                          "src": "1717:3:2",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 317,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1717:10:2",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      "id": 318,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "transfer",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "1717:19:2",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_transfer_nonpayable$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256)"
+                      }
+                    },
+                    "id": 323,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1717:42:2",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 324,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1717:42:2"
+                }
+              ]
+            },
+            "documentation": "@dev Withdraws the available balance. This may ONLY be called by the \"finance\" role",
+            "id": 326,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [],
+                "id": 312,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 311,
+                  "name": "onlyFinance",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 345,
+                  "src": "1695:11:2",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "1695:11:2"
+              }
+            ],
+            "name": "withdrawBalance",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 310,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1683:2:2"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 313,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1707:0:2"
+            },
+            "scope": 327,
+            "src": "1659:107:2",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 328,
+        "src": "126:1647:2"
+      }
+    ],
+    "src": "0:1773:2"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.21+commit.dfe3193c.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.0",
+  "updatedAt": "2018-05-31T18:04:48.280Z"
+}
