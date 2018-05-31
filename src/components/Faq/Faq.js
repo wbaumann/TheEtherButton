@@ -48,7 +48,10 @@ class Faq extends Component {
         <FaqItem title="Where's the code?" >
           <p>All code is freely available on GitHub: <a target="_blank" rel="noopener noreferrer" href="https://github.com/wbaumann/TheEtherButton">TheEtherButton</a>.</p>
         </FaqItem>
-        <FaqItem title="Isn't this contract vulernable to front running?" >
+        <FaqItem title="Why are clicks so slow?" >
+          <p>All Ethereum interactions must be mined into the blockchain, so clicks cannot be processed until this completes. Ethereum blocks are normally mined every 10 to 20 seconds, so the wait should never be too long. But there does exist a chance that someone else clicked the button while you were waiting.</p>
+        </FaqItem>
+        <FaqItem title="So isn't this contract vulernable to front running?" >
           <p>Sure is... Blockchains are subject to race conditions, meaning that the order of transactions in a given block can be manipulated. We have not attempted to handle this scenario to allow for further manipulation of the gameplay.</p>
         </FaqItem>
       </div>

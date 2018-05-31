@@ -68,32 +68,17 @@ Once complete, you can start `npm` as usual to test your development work:
 npm run start
 ```
 
-### Deployment to the MainNet
+### Deployment the BlockChain
 
-When deploying to the mainnet, you should first launch `geth` in order to allow you to interact with the blockchain from your local machine:
-
-```bash
-geth --light --unlock "MY_ADDRESS" --rpc --rpcapi "eth,net,web3" --rpccorsdomain '' --rpcaddr localhost --rpcport 8546
-```
-
-Next, perform a dry-run to ensure that the migration can succeed (before using real money):
+Prior to deployment, it is recommended that you flatten all source files into a single one with [truffle-flattener](https://github.com/alcuadrado/truffle-flattener).
 
 ```bash
-truffle migrate --dry-run --network live
+truffle-flattener ButtonClickGameContract.sol >> FlattenedContract.sol
 ```
 
-Assuming that succeeds, you can deploy to the mainnet:
+Once complete, you can upload your flattened contract to [Remix](https://remix.ethereum.org/), a web based IDE. Using a combination of MetaMask and the deploy functionality on this page, you should be able to deploy the contract fairly easily.
 
-```bash
-$ truffle migrate --network live
-
-Using network 'live'.
-
-Running migration: 1_initial_migration.js
-...
-```
-
-Please note that you will need sufficient gas in your unlocked account to manage the deployment.
+*Note: I found Remix to be far easier and more consistent to use that Truffle, which may merely be due to deployment misconfigurations on my end.*
 
 ## Starting the Game
 
@@ -117,18 +102,12 @@ truffle(develop)> web3.currentProvider.sendAsync({jsonrpc: "2.0", method: "evm_m
 
 ## EtherScan
 
-The game's contract is available on Etherscan: 
+The game's contract is available on Etherscan:
 
 * Ropsten: [0x945687adcc12b818c46f4dc6834712ed40345093](https://ropsten.etherscan.io/address/0x945687adcc12b818c46f4dc6834712ed40345093)
-* MainNet: [0x1326a7cf4f7366a4f5308f5e53dea238b72fd3b9](https://etherscan.io/address/0x1326a7cf4f7366a4f5308f5e53dea238b72fd3b9).
+* MainNet: TODO
 
-If you wish to deploy the contract ABI to etherscan, it is recommended that you use the [truffle-flattener](https://github.com/alcuadrado/truffle-flattener) to combine the results into a single file as follows:
-
-```bash
-truffle-flattener ButtonClickGameContract.sol >> flattened.sol
-```
-
-The results can be uploaded via the contract verification page:
+Using the same flattened contract as before, we can upload the source to our Etherscan page:
 
 * [Etherscan Contract Verification](https://etherscan.io/verifyContract?a=0x1326a7cf4f7366a4f5308f5e53dea238b72fd3b9)
 
@@ -136,7 +115,7 @@ Please note that the contract name in the verification must be `ButtonClickGameC
 
 ## Donate
 
-If you like our project, please consider donating:
+If you like this project, please consider donating:
 
 * **BTC:** [3MGikseSB69cGjUkJs4Cqg93s5s8tv38tK](bitcoin:3MGikseSB69cGjUkJs4Cqg93s5s8tv38tK)
 * **ETH:** [0xd5F9Da6a4F9c93B12588D89c7F702a0f7d92303D](https://etherscan.io/address/0xd5F9Da6a4F9c93B12588D89c7F702a0f7d92303D)
