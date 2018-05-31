@@ -114,7 +114,28 @@ Finally if you are on a local test network, you can simulate mined blocks by run
 ```bash
 truffle(develop)> web3.currentProvider.sendAsync({jsonrpc: "2.0", method: "evm_mine", id: 12345}, () => {})
 ```
+
+## EtherScan
+
+The game's contract is available on Etherscan: 
+
+* Ropsten: [0x945687adcc12b818c46f4dc6834712ed40345093](https://ropsten.etherscan.io/address/0x945687adcc12b818c46f4dc6834712ed40345093)
+* MainNet: [0x1326a7cf4f7366a4f5308f5e53dea238b72fd3b9](https://etherscan.io/address/0x1326a7cf4f7366a4f5308f5e53dea238b72fd3b9).
+
+If you wish to deploy the contract ABI to etherscan, it is recommended that you use the [truffle-flattener](https://github.com/alcuadrado/truffle-flattener) to combine the results into a single file as follows:
+
+```bash
+truffle-flattener ButtonClickGameContract.sol >> flattened.sol
+```
+
+The results can be uploaded via the contract verification page:
+
+* [Etherscan Contract Verification](https://etherscan.io/verifyContract?a=0x1326a7cf4f7366a4f5308f5e53dea238b72fd3b9)
+
+Please note that the contract name in the verification must be `ButtonClickGameContract` in order to match our deployment.
+
 ## Donate
+
 If you like our project, please consider donating:
 
 * **BTC:** [3MGikseSB69cGjUkJs4Cqg93s5s8tv38tK](bitcoin:3MGikseSB69cGjUkJs4Cqg93s5s8tv38tK)
