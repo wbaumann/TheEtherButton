@@ -2168,6 +2168,12 @@
       "links": {},
       "address": "0x945687adcc12b818c46f4dc6834712ed40345093",
       "transactionHash": "0xa8eba65fbde8fd6b0585796091ecd497ef27a8fdd6118a72fcad782e977fb2e4"
+    },
+    "1": {
+      "events": {},
+      "links": {},
+      "address": "0xdeafc8d49ea6d6044eaa53f5e7c7c35c60e13d7f",
+      "transactionHash": "0x740a5cbcc057fe09be0e874ac4a34912fef2653876f2cbfd17a814e1c13f623a"
     }
   },
   "schemaVersion": "2.0.0",

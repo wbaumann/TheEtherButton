@@ -105,7 +105,7 @@ truffle(develop)> web3.currentProvider.sendAsync({jsonrpc: "2.0", method: "evm_m
 The game's contract is available on Etherscan:
 
 * Ropsten: [0x945687adcc12b818c46f4dc6834712ed40345093](https://ropsten.etherscan.io/address/0x945687adcc12b818c46f4dc6834712ed40345093)
-* MainNet: TODO
+* MainNet: [0xdeafc8d49ea6d6044eaa53f5e7c7c35c60e13d7f](https://etherscan.io/address/0xdeafc8d49ea6d6044eaa53f5e7c7c35c60e13d7f)
 
 Using the same flattened contract as before, we can upload the source to our Etherscan page:
 
