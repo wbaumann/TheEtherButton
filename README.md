@@ -68,7 +68,7 @@ Once complete, you can start `npm` as usual to test your development work:
 npm run start
 ```
 
-### Deployment the BlockChain
+### Deployment to the BlockChain
 
 Prior to deployment, it is recommended that you flatten all source files into a single one with [truffle-flattener](https://github.com/alcuadrado/truffle-flattener).
 
