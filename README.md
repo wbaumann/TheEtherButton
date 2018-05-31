@@ -14,6 +14,8 @@ This project requires both [npm](https://www.npmjs.com/) and [truffle](https://g
 npm install -g truffle
 ```
 
+## Deployment
+
 Next, you'll need to launch truffle:
 
 ```bash
@@ -42,6 +44,18 @@ Saving successful migration to network...
 Saving artifacts...
 ```
 
+Please note that if you are seeing an error like:
+
+```bash
+Attempting to run transaction which calls a contract function, but recipient address 0xabcdef.... is not a contract address
+```
+
+Be sure to add the `--reset` flag to the `migrate` command like:
+
+```bash
+truffle(develop)> migrate --reset
+```
+
 One the migration completes, you'll like see an output similar to what is shown above. Be sure to note the address to which the contract deployed (`0x4e72770760c011647d4873f60a3cf6cdea896cd8` in the example above). To simplify future interactions with this address, we recommend saving this as a local variable:
 
 ```bash
@@ -54,7 +68,7 @@ Once complete, you can start `npm` as usual to test your development work:
 npm run start
 ```
 
-## Launching
+## Starting the Game
 
 Once the game has been deployed, you can start it via the Truffle contract via the following command by replacing the sample address with the contract one:
 
@@ -73,6 +87,11 @@ Finally if you are on a local test network, you can simulate mined blocks by run
 ```bash
 truffle(develop)> web3.currentProvider.sendAsync({jsonrpc: "2.0", method: "evm_mine", id: 12345}, () => {})
 ```
+## Donate
+If you like our project, please consider donating:
+
+* **BTC:** [3MGikseSB69cGjUkJs4Cqg93s5s8tv38tK](bitcoin:3MGikseSB69cGjUkJs4Cqg93s5s8tv38tK)
+* **ETH:** [0xd5F9Da6a4F9c93B12588D89c7F702a0f7d92303D](https://etherscan.io/address/0xd5F9Da6a4F9c93B12588D89c7F702a0f7d92303D)
 
 ## License
 
