@@ -7,8 +7,9 @@ module.exports = {
     },
     live: {
       host: '127.0.0.1', // Random IP for example purposes (do not use)
-      port: 80,
+      port: 8546,
       network_id: 1, // Ethereum public network
+      gas: 6721975,
       // optional config values:
       // gas
       // gasPrice

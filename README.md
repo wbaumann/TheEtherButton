@@ -68,6 +68,33 @@ Once complete, you can start `npm` as usual to test your development work:
 npm run start
 ```
 
+### Deployment to the MainNet
+
+When deploying to the mainnet, you should first launch `geth` in order to allow you to interact with the blockchain from your local machine:
+
+```bash
+geth --light --unlock "MY_ADDRESS" --rpc --rpcapi "eth,net,web3" --rpccorsdomain '' --rpcaddr localhost --rpcport 8546
+```
+
+Next, perform a dry-run to ensure that the migration can succeed (before using real money):
+
+```bash
+truffle migrate --dry-run --network live
+```
+
+Assuming that succeeds, you can deploy to the mainnet:
+
+```bash
+$ truffle migrate --network live
+
+Using network 'live'.
+
+Running migration: 1_initial_migration.js
+...
+```
+
+Please note that you will need sufficient gas in your unlocked account to manage the deployment.
+
 ## Starting the Game
 
 Once the game has been deployed, you can start it via the Truffle contract via the following command by replacing the sample address with the contract one:
