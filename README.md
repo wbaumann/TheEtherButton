@@ -113,6 +113,14 @@ Using the same flattened contract as before, we can upload the source to our Eth
 
 Please note that the contract name in the verification must be `ButtonClickGameContract` in order to match our deployment.
 
+## Web Deployment
+
+For convenience, we use GitHub Pages as our hosting for this site. Deployments can be done via the [gh-pages](https://github.com/tschaub/gh-pages) tool, which is included in our `package.json` file. Deployments can be run as follows:
+
+```bash
+npm run deploy
+```
+
 ## Donate
 
 If you like this project, please consider donating:
