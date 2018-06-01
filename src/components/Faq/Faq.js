@@ -20,13 +20,15 @@ class Faq extends Component {
           <ul>
             <li>A computer with <a target="_blank" rel="noopener noreferrer" href="https://www.google.com/chrome/browser/features.html">Chrome</a> or <a target="_blank" rel="noopener noreferrer" href="https://www.mozilla.org/firefox">Firefox</a></li>
             <li><a target="_blank" rel="noopener noreferrer" href="https://metamask.io/">MetaMask</a>, a digital wallet used for Ethereum apps</li>
-            <li>Ether, a &#34;cryptocurrency&#34; that powers the <a target="_blank" rel="noopener noreferrer" href="https://www.ethereum.org/">Ethereum</a> blockchain, which runs this game.</li>
+            <li>Ether, a &#34;cryptocurrency&#34; that powers the <a target="_blank" rel="noopener noreferrer" href="https://www.ethereum.org/">Ethereum</a> blockchain, which runs this game. You can purchase this on <a target="_blank" rel="noopener noreferrer" href="https://www.coinbase.com/join/52ae52282a6ce60a89000042">Coinbase</a> or a variety of other cryptocurrency exchanges.</li>
           </ul>
           <p>The video below will guide you through how install MetaMask:</p>
           <LazyLoad height={315} once >
-            <p className="iframe-center">
-              <iframe title="metamask" width="560" height="315" src="https://www.youtube-nocookie.com/embed/tfETpi-9ORs" frameBorder="0" allowFullScreen />
-            </p>
+            <div className="media">
+              <div className="media video">
+                <iframe title="metamask" src="https://www.youtube-nocookie.com/embed/tfETpi-9ORs" frameBorder="0" allowFullScreen />
+              </div>
+            </div>
           </LazyLoad>
         </FaqItem>
         <FaqItem title="What are the rules?">

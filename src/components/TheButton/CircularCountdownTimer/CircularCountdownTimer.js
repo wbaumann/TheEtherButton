@@ -11,7 +11,7 @@ import './styles.css';
 class CircularCountdownTimer extends Component {
   constructor(props) {
     super(props);
-    this.scale = window.devicePixelRatio || 1;
+    this.scale = 1;
     this.radius = null;
     this.innerRadius = null;
   }
