@@ -67,7 +67,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "predeploy": "npm run build && mv build_webpack/* build",
+    "predeploy": "npm run build && rsync -a build_webpack/ build/ && rm -rf build_webpack",
     "deploy": "gh-pages -d build"
   },
   "jest": {
