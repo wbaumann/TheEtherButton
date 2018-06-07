@@ -6,6 +6,8 @@
 
 [The Button was an online meta-game and social experiment that featured an online button and 60 second countdown timer that would reset each time the button was pressed](https://en.wikipedia.org/wiki/The_Button_(Reddit)). We thought it would be fun to create the same concept but on the Ethereum blockchain.
 
+You can find a quick project overview on [State of the DApps](https://www.stateofthedapps.com/dapps/the-ether-button) as well.
+
 ## Install
 
 This project requires both [npm](https://www.npmjs.com/) and [truffle](https://github.com/trufflesuite/truffle). Once you have the former, you can install the latter via:
