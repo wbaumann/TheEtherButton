@@ -31,6 +31,11 @@ bower_components
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
+build/asset-manifest.json
+build/favicon.ico
+build/fonts/
+build/index.html
+build/static/
 
 # Dependency directories
 node_modules/
