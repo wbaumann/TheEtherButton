@@ -48,7 +48,11 @@ class Faq extends Component {
           <p>Clicking the button costs a small amount (ie 0.0005ETH) in order to discourage someone from creating 1000s of Ethereum accounts and constantly spamming this Smart Contract to keep the button pinned at 20 blocks.</p>
         </FaqItem>
         <FaqItem title="Where's the code?" >
-          <p>All code is freely available on GitHub: <a target="_blank" rel="noopener noreferrer" href="https://github.com/wbaumann/TheEtherButton">TheEtherButton</a>.</p>
+          <ul>
+            <li>All code is available on: <a target="_blank" rel="noopener noreferrer" href="https://github.com/wbaumann/TheEtherButton">GitHub</a>.</li>
+            <li>Our contract listing is available on: <a target="_blank" rel="noopener noreferrer" href="https://etherscan.io/address/0xdeafc8d49ea6d6044eaa53f5e7c7c35c60e13d7f#code">EtherScan</a>.</li>
+            <li>Our dApp listing is available on: <a target="_blank" rel="noopener noreferrer" href="https://www.stateofthedapps.com/dapps/the-ether-button">State of the DApps</a>.</li>
+          </ul>
         </FaqItem>
         <FaqItem title="Why are clicks so slow?" >
           <p>All Ethereum interactions must be mined into the blockchain, so clicks cannot be processed until this completes. Ethereum blocks are normally mined every 10 to 20 seconds, so the wait should never be too long. But there does exist a chance that someone else clicked the button while you were waiting.</p>
