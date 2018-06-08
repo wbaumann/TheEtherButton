@@ -1,4 +1,4 @@
-# TheEtherButton
+# [TheEtherButton](https://wbaumann.github.io/TheEtherButton/)
 
 > An [Ethereum](https://www.ethereum.org/)-based version of Reddit's [r/TheButton](https://www.reddit.com/r/thebutton/) game. The button counts down from 20 blocks. You will be awarded an [ERC-721](http://erc721.org/) token flair when you click the button, but you may only do so once. And the block counter will reset to 20 as soon as you do. Choose wisely...
 
