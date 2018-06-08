@@ -2,11 +2,11 @@
 
 > An [Ethereum](https://www.ethereum.org/)-based version of Reddit's [r/TheButton](https://www.reddit.com/r/thebutton/) game. The button counts down from 20 blocks. You will be awarded an [ERC-721](http://erc721.org/) token flair when you click the button, but you may only do so once. And the block counter will reset to 20 as soon as you do. Choose wisely...
 
+[Click here to play TheEtherButton game.](https://wbaumann.github.io/TheEtherButton/)
+
 ## Overview
 
 [The Button was an online meta-game and social experiment that featured an online button and 60 second countdown timer that would reset each time the button was pressed](https://en.wikipedia.org/wiki/The_Button_(Reddit)). We thought it would be fun to create the same concept but on the Ethereum blockchain.
-
-You can find a quick project overview on [State of the DApps](https://www.stateofthedapps.com/dapps/the-ether-button) as well.
 
 ## Install
 
